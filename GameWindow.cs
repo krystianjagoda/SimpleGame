@@ -9,24 +9,30 @@ namespace SimpleGame
 {
     class GameWindow
     {
-        Size windowSize = new Size();
 
-        public int Scale = 20;
-        public int XSize = 100;
-        public int YSize = 100;
+        private int Scale = 30;
+
+        public int UnitHeight = 20;
+        public int UnitLength = 20;
+
+        public int XSize = 200;
+        public int YSize = 200;
+
+        public int centerX = 0;
+        public int centerY = 0;
 
 
         public void SetSize(int X, int Y)
         {
             XSize = X;
             YSize = Y;
-        }
 
-        public Size ScaleWindow()
-        {
-            windowSize.Height = YSize;
-            windowSize.Width = XSize;
-            return windowSize;
+            centerX = XSize / 2;
+            centerY = YSize / 2;
+
+            UnitLength = XSize / Scale;
+            UnitHeight = YSize / Scale;
+
         }
         
         

@@ -12,6 +12,8 @@ namespace SimpleGame
 {
     public partial class SimpleGame : Form
     {
+        public bool DebugMode = true;
+
         Graphics g = null;
         GameWindow gameWindow = new GameWindow();
 
@@ -23,14 +25,16 @@ namespace SimpleGame
         {
             InitializeComponent();
 
-            gameWindow.SetSize(400, 400);
-            canvas.Size = gameWindow.ScaleWindow();
             g = canvas.CreateGraphics();
 
+            canvas.Size = new Size(600, 600);
+            gameWindow.SetSize(600, 600);
 
+            ship.Initialize(gameWindow.centerX, gameWindow.centerY, gameWindow.UnitLength, gameWindow.UnitHeight);
 
 
             RefreshView();
+
             timerRefresh.Enabled = true;   // Start Refresh
         }
 
@@ -40,15 +44,25 @@ namespace SimpleGame
             //capture left arrow key
             if (keyData == Keys.Left)
             {
-                ship.positionX = ship.positionX -20;
-                if (ship.positionX < -140) ship.positionX = -140;
+                ship.positionX = ship.positionX - gameWindow.UnitLength;
                 return true;
             }
             //capture right arrow key
             if (keyData == Keys.Right)
             {
-                ship.positionX = ship.positionX + 20;
-                if (ship.positionX > 140) ship.positionX = 140;
+                ship.positionX = ship.positionX + gameWindow.UnitLength;
+                return true;
+            }
+
+            if (keyData == Keys.Up)
+            {
+                ship.positionY = ship.positionY - gameWindow.UnitHeight;
+                return true;
+            }
+            //capture right arrow key
+            if (keyData == Keys.Down)
+            {
+                ship.positionY = ship.positionY + gameWindow.UnitHeight;
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
@@ -62,16 +76,26 @@ namespace SimpleGame
         }
 
 
-        public void RefreshView()
-        {            
-            labelPosition.Text = (ship.positionX).ToString();
 
-            canvas.Refresh();
-        }
 
         private void canvas_Paint(object sender, PaintEventArgs e)
         {                       
             ship.drawShip(g);           
         }
+
+        public void RefreshView()
+        {
+
+            if(DebugMode == true)
+            {
+                debugBox.Visible = true;
+                labelPositionRel.Text = (ship.positionX).ToString() + "," + (ship.positionY).ToString();
+                labelSize.Text = (SimpleGame.ActiveForm.Size.Width).ToString() + "," + (SimpleGame.ActiveForm.Size.Height).ToString();
+            }
+
+
+            canvas.Refresh();
+        }
+
     }
 }
