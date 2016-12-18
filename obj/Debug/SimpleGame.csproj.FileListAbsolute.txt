@@ -1,0 +1,9 @@
+C:\Workspace\VisualStudio\SimpleGame\SimpleGame\bin\Debug\SimpleGame.exe.config
+C:\Workspace\VisualStudio\SimpleGame\SimpleGame\bin\Debug\SimpleGame.exe
+C:\Workspace\VisualStudio\SimpleGame\SimpleGame\bin\Debug\SimpleGame.pdb
+C:\Workspace\VisualStudio\SimpleGame\SimpleGame\obj\Debug\SimpleGame.csprojResolveAssemblyReference.cache
+C:\Workspace\VisualStudio\SimpleGame\SimpleGame\obj\Debug\SimpleGame.Properties.Resources.resources
+C:\Workspace\VisualStudio\SimpleGame\SimpleGame\obj\Debug\SimpleGame.csproj.GenerateResource.Cache
+C:\Workspace\VisualStudio\SimpleGame\SimpleGame\obj\Debug\SimpleGame.exe
+C:\Workspace\VisualStudio\SimpleGame\SimpleGame\obj\Debug\SimpleGame.pdb
+C:\Workspace\VisualStudio\SimpleGame\SimpleGame\obj\Debug\SimpleGame.SimpleGame.resources
