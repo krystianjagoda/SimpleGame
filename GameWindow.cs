@@ -10,6 +10,8 @@ namespace SimpleGame
     class GameWindow
     {
 
+        public bool GameStop = false;
+
         private int Scale = 30;
 
         public int UnitHeight = 20;
