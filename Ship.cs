@@ -60,16 +60,15 @@ namespace SimpleGame
 
     }
 
-
-
-    class Bullet
+    class Asteroid
     {
 
-        Pen myPen = new Pen(Color.Yellow);
-        Brush myBrush = new SolidBrush(Color.Yellow);
+        Pen myPen = new Pen(Color.White);
+        Brush myBrush = new SolidBrush(Color.White);
 
-        int size = 8;
+        public float size = 50;
 
+        public string Name = "asteroidX";
 
         public bool Visible = false;
 
@@ -81,8 +80,96 @@ namespace SimpleGame
         public float velocityX = 0;
         public float velocityY = 0;
 
-        public float speedX = 20;
-        public float speedY = 20;
+        public float speedX = 0.1F;
+        public float speedY = 0.1F;
+
+
+
+        public void shoot(float Xstart, float Ystart, float Xstop, float Ystop)
+        {
+            this.X = Xstart;
+            this.Y = Ystart;
+
+            float A = Xstop - Xstart;
+            float B = Ystop - Ystart;
+            this.Angle = (float)(Math.Atan2(A, B) / Math.PI);
+
+            this.velocityX = (float)Math.Sin(this.Angle * Math.PI);
+            this.velocityY = (float)Math.Cos(this.Angle * Math.PI);
+
+            Visible = true;
+        }
+
+
+        public void Spawn(float X, float Y, float Xspeed, float Yspeed, float Size)
+        {
+            this.size = Size;
+
+            this.X = X;
+            this.Y = Y;
+
+            this.velocityX = Xspeed;
+            this.velocityY = Yspeed;
+
+            Visible = true;
+        }
+
+        public void Position(float positionX, float positionY)
+        {
+            this.X = positionX;
+            this.Y = positionY;
+        }
+
+
+        public void refresh()
+        {
+            Position(this.X + this.velocityX * this.speedX, this.Y + this.velocityY * this.speedY);
+        }
+
+        public bool isInRange(float X1, float Y1, float X2, float Y2)
+        {
+            if (this.X < X1 || this.X > X2 || this.Y < Y1 || this.Y > Y2)
+            {
+                return false;
+            }
+            else return true;
+        }
+
+        public void draw(Graphics g)
+        {
+            if (Visible)
+            {
+                g.FillEllipse(myBrush, X - size / 2, Y - size / 2, size, size);
+            }
+        }
+
+    }
+
+
+
+
+    class Bullet
+    {
+
+        Pen myPen = new Pen(Color.Yellow);
+        Brush myBrush = new SolidBrush(Color.Yellow);
+
+        int size = 8;
+
+        public string Name = "bulletX";
+
+        public bool Visible = false;
+
+        public float X = 300;
+        public float Y = 300;
+
+        public double Angle;
+
+        public float velocityX = 0;
+        public float velocityY = 0;
+
+        public float speedX = 30;
+        public float speedY = 30;
 
 
 
@@ -113,7 +200,14 @@ namespace SimpleGame
             Position(this.X + this.velocityX * this.speedX, this.Y + this.velocityY * this.speedY);
         }
 
-
+        public bool isInRange(float X1, float Y1, float X2, float Y2)
+        {
+            if (this.X < X1 || this.X > X2 || this.Y < Y1 || this.Y > Y2)
+            {
+                return false;
+            }
+            else return true;
+        }
 
         public void drawBullet(Graphics g)
         {
@@ -124,43 +218,4 @@ namespace SimpleGame
         }
 
     }
-
-
-
-    public class Bullets : IEquatable<Bullets>
-    {
-
-        public UInt32 Number { get; set; }
-        public object Bullet { get; set; }
-        
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null) return false;
-            Bullet objAsPart = obj as Bullet;
-            if (objAsPart == null) return false;
-            else return Equals(objAsPart);
-        }
-
-        public override string ToString()
-        {
-            return "Uzupelnij sobie to";
-        }
-
-        public override int GetHashCode()
-        {
-            return (int)Number;
-        }
-
-
-        public bool Equals(Bullets other)
-        {
-            if (other == null) return false;
-            return (this.Number.Equals(other.Number));
-        }
-        // Should also override == and != operators.
-
-    }
-
-
 }

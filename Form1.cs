@@ -24,7 +24,19 @@ namespace SimpleGame
 
         Ship ship = new Ship();
         Bullet bullet1 = new Bullet();
-        public List<Bullets> Bullets = new List<Bullets>();
+
+        List<Bullet> bullets = new List<Bullet>
+        {
+        //     new Bullet(){Name = "bulletA", X = 200, Y = 200, Visible = true },
+        //     new Bullet(){Name = "bulletB", X = 100, Y = 100, Visible = true },
+        };
+
+        List<Asteroid> asteroids = new List<Asteroid>
+        {
+          //       new Asteroid(){Name = "bulletA", X = 200, Y = 200, Visible = true },
+            //     new Bullet(){Name = "bulletB", X = 100, Y = 100, Visible = true },
+        };
+
 
 
         int MouseX = 50;
@@ -39,8 +51,28 @@ namespace SimpleGame
            
 
             ship.Initialize(gameWindow.centerX, gameWindow.centerY);
-       
 
+
+            Random random1 = new Random();
+
+
+            for (int i = 0; i < gameWindow.SetAsteroidsNumber; i++)
+            {
+                int Xrand = random1.Next(0, 600);
+                int Yrand = random1.Next(0, 600);
+                int VXrand = random1.Next(-50, 50);
+                int VYrand = random1.Next(-50, 50);
+                int Srand = random1.Next(20, 100);
+
+                asteroids.Add(new Asteroid()
+                {
+                    Visible = true,
+                });
+
+                gameWindow.NumberOfAsteroids = asteroids.Count();
+                asteroids[gameWindow.NumberOfAsteroids - 1].Spawn(Xrand, Yrand, VXrand, VYrand, Srand);
+
+            }
 
             RefreshView();
 
@@ -123,6 +155,18 @@ namespace SimpleGame
 
             bullet1.drawBullet(g);
 
+            foreach (Asteroid a in asteroids)
+            {
+                a.draw(g);
+            }
+
+            foreach (Bullet b in bullets)
+            {
+                b.drawBullet(g);
+            }
+
+
+
 
         }
 
@@ -130,14 +174,18 @@ namespace SimpleGame
         {
             if (DebugMode == true)
             {
+                gameWindow.NumberOfBullets = bullets.Count();
+                gameWindow.NumberOfAsteroids = asteroids.Count();
                 debugBox.Visible = true;
-              //  labelPositionRel.Text = (ship.positionX).ToString() + "," + (ship.positionY).ToString();
+                labelBullets.Text = gameWindow.NumberOfBullets.ToString();
+                labelAsteroids.Text = gameWindow.NumberOfAsteroids.ToString();
                 labelPositionAbs.Text = (ship.Xabs).ToString() + "," + ship.Yabs.ToString();
                 labelSpeed.Text = (ship.velocityX).ToString() + "," + (ship.velocityY).ToString();
                 labelSize.Text = (canvas.Size.Height).ToString() + "," + (canvas.Size.Width).ToString();
                 labelAngle.Text = ship.Angle.ToString();
             }
 
+            labelScore.Text = gameWindow.Score.ToString();
             canvas.Refresh();
         }
 
@@ -181,10 +229,52 @@ namespace SimpleGame
                     if (ship.Yabs <= 0) ship.Yabs = (gameWindow.YSize - ship.heigh / 2);
                 }
 
-
-
-
                 bullet1.refresh();
+
+                foreach (Bullet b in bullets)
+                {
+                    b.refresh();
+                }
+
+                foreach (Bullet b in bullets)
+                {
+                    
+                    if (b.isInRange(0, 0, gameWindow.XSize, gameWindow.YSize) == false)
+                    {
+                        bullets.Remove(b);
+                        break;
+                    }
+                }
+
+                foreach (Asteroid a in asteroids)
+                {
+                    Asteroid temp = asteroids[0];
+                    bool needremove = false;
+
+                    a.refresh();
+
+                    if (a.X > gameWindow.XSize)     a.X = 0;
+                    if (a.X < 0)                    a.X = gameWindow.XSize;
+                    if (a.Y > gameWindow.YSize)     a.Y = 0;
+                    if (a.Y < 0)                    a.Y = gameWindow.YSize;
+
+                    foreach (Bullet b in bullets)
+                    {
+                        if (((a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y)) - ((a.size/2)*(a.size/2)) < 10)
+                        {
+                            temp = a;
+                            needremove = true;
+                        }
+                    }
+                    if (needremove)
+                    {
+                        asteroids.Remove(temp);
+                        gameWindow.Score++;
+                        break;
+                    }
+
+                }
+
             }
         }
 
@@ -199,6 +289,15 @@ namespace SimpleGame
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 bullet1.shoot(ship.Xabs, ship.Yabs, MouseX, MouseY);
+
+                bullets.Add(new Bullet(){
+                    Visible = true,                                   
+                });
+
+                gameWindow.NumberOfBullets = bullets.Count();
+
+                bullets[gameWindow.NumberOfBullets - 1].shoot(ship.Xabs, ship.Yabs, MouseX, MouseY);
+
             }
 
             if (e.Button == System.Windows.Forms.MouseButtons.Right)

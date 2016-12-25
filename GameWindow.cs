@@ -10,6 +10,13 @@ namespace SimpleGame
     class GameWindow
     {
 
+        public int Score = 0;
+
+        public int NumberOfBullets;
+        public int NumberOfAsteroids;
+
+        public int SetAsteroidsNumber = 5;
+
         public bool GameStop = false;
         public bool StopOnWalls = true;
 
