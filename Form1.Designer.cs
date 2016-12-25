@@ -130,9 +130,9 @@
             // buttonStopGame
             // 
             this.buttonStopGame.BackColor = System.Drawing.Color.Firebrick;
-            this.buttonStopGame.Location = new System.Drawing.Point(70, 171);
+            this.buttonStopGame.Location = new System.Drawing.Point(63, 171);
             this.buttonStopGame.Name = "buttonStopGame";
-            this.buttonStopGame.Size = new System.Drawing.Size(74, 24);
+            this.buttonStopGame.Size = new System.Drawing.Size(81, 24);
             this.buttonStopGame.TabIndex = 11;
             this.buttonStopGame.Text = "Stop";
             this.buttonStopGame.UseVisualStyleBackColor = false;

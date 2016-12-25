@@ -16,15 +16,9 @@ namespace SimpleGame
 
         public int heigh = 20;
         public int length = 20;
-
-        public int zeroX = 100;  // Initial Position
-        public int zeroY = 100;  // Initial Position
-
-        public float positionX = 0;
-        public float positionY = 0;
-          
-        public float Xabs;
-        public float Yabs;
+         
+        public float Xabs = 0;
+        public float Yabs = 0;
 
         public double Angle;
 
@@ -34,23 +28,29 @@ namespace SimpleGame
         public float speedX = 2;
         public float speedY = 2;
 
+        public double slowdown = 0.98;
 
 
-        public void Initialize(int _zeroX, int _zeroY, int length, int heigh)
+
+        public void Initialize(float Xinit, float Yinit)
         {
-            zeroX = _zeroX - length/2;
-            zeroY = _zeroY - heigh /2;
-            Position(0, 0);
+            Position(Xinit, Yinit);
         }
 
-        public void Position(float _positionX, float _positionY)
+        public void Position(float positionX, float positionY)
         {
-            positionX = _positionX;
-            positionY = _positionY;
+            this.Xabs = positionX;
+            this.Yabs = positionY;
+        }
 
-            Xabs = positionX + length/2+ zeroX;
-            Yabs = positionY + heigh/2 + zeroY;
-    }
+        public void refresh()
+        {
+            Position(this.Xabs + this.velocityX * this.speedX, this.Yabs + this.velocityY * this.speedY);
+            if (this.velocityX > 0) this.velocityX = this.velocityX * (float)slowdown;
+            if (this.velocityX < 0) this.velocityX = this.velocityX * (float)slowdown;
+            if (this.velocityY > 0) this.velocityY = this.velocityY * (float)slowdown;
+            if (this.velocityY < 0) this.velocityY = this.velocityY * (float)slowdown;
+        }
 
 
         public void drawShip(Graphics g)
@@ -68,55 +68,49 @@ namespace SimpleGame
         Pen myPen = new Pen(Color.Yellow);
         Brush myBrush = new SolidBrush(Color.Yellow);
 
-        Color color = Color.Yellow;
+        int size = 8;
+
 
         public bool Visible = false;
 
-        public float X = 400;
-        public float Y = 400;
+        public float X = 300;
+        public float Y = 300;
 
-        public float Xstart = 20;
-        public float Ystart = 20;
+        public double Angle;
 
-        public float Xstop = 30;
-        public float Ystop = 30;
+        public float velocityX = 0;
+        public float velocityY = 0;
 
-        public float speedX = 1;
-        public float speedY = 1;
-
-        public float dX;
-        public float dY;
+        public float speedX = 20;
+        public float speedY = 20;
 
 
-        int speed = 20;
 
-        int size = 8;
-
-        public void shoot()
+        public void shoot(float Xstart, float Ystart, float Xstop, float Ystop)
         {
-            X = Xstart;
-            Y = Ystart;
+            this.X = Xstart;
+            this.Y = Ystart;
 
-            float a = Math.Abs(Xstop - Ystart);
-            float b = Math.Abs(Ystop - Ystart);
+            float A = Xstop - Xstart;
+            float B = Ystop - Ystart;
+            this.Angle = (float)(Math.Atan2(A, B) / Math.PI);
 
-            float step = (float)Math.Sqrt(a * a + b * b)/speed;
+            this.velocityX = (float)Math.Sin(this.Angle * Math.PI);
+            this.velocityY = (float)Math.Cos(this.Angle * Math.PI);
 
-            dX = (Xstop - Xstart) / step;
-            dY = (Ystop - Ystart) / step;
             Visible = true;
         }
 
+        public void Position(float positionX, float positionY)
+        {
+            this.X = positionX;
+            this.Y = positionY;
+        }
+
+
         public void refresh()
         {
-            if (Visible)
-            {
-                if (X - Xstop > 2 || X - Xstop < -2 || Y - Ystop > 2 || Y -Ystop < -2)
-                {
-                    X = X + dX;
-                    Y = Y + dY;
-                }
-            }
+            Position(this.X + this.velocityX * this.speedX, this.Y + this.velocityY * this.speedY);
         }
 
 
@@ -125,7 +119,7 @@ namespace SimpleGame
         {
             if (Visible)
             {
-                g.FillEllipse(myBrush, X + size / 2, Y + size / 2, size, size);
+                g.FillEllipse(myBrush, X - size / 2, Y - size / 2, size, size);
             }
         }
 

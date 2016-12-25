@@ -11,6 +11,7 @@ namespace SimpleGame
     {
 
         public bool GameStop = false;
+        public bool StopOnWalls = true;
 
         private int Scale = 30;
 

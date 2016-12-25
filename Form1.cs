@@ -38,7 +38,9 @@ namespace SimpleGame
             gameWindow.SetSize(600, 600);
            
 
-            ship.Initialize(gameWindow.centerX, gameWindow.centerY, gameWindow.UnitLength, gameWindow.UnitHeight);
+            ship.Initialize(gameWindow.centerX, gameWindow.centerY);
+       
+
 
             RefreshView();
 
@@ -116,10 +118,12 @@ namespace SimpleGame
             Pen myPen = new Pen(whiteBrush, 1);
             g.DrawLine(myPen, ship.Xabs, ship.Yabs, MouseX, MouseY);
 
-
+            
             ship.drawShip(g);
 
             bullet1.drawBullet(g);
+
+
         }
 
         public void RefreshView()
@@ -127,7 +131,7 @@ namespace SimpleGame
             if (DebugMode == true)
             {
                 debugBox.Visible = true;
-                labelPositionRel.Text = (ship.positionX).ToString() + "," + (ship.positionY).ToString();
+              //  labelPositionRel.Text = (ship.positionX).ToString() + "," + (ship.positionY).ToString();
                 labelPositionAbs.Text = (ship.Xabs).ToString() + "," + ship.Yabs.ToString();
                 labelSpeed.Text = (ship.velocityX).ToString() + "," + (ship.velocityY).ToString();
                 labelSize.Text = (canvas.Size.Height).ToString() + "," + (canvas.Size.Width).ToString();
@@ -158,30 +162,27 @@ namespace SimpleGame
         private void timerGameTick_Tick(object sender, EventArgs e)
         {
 
-            float A = MouseX - ship.Xabs;
-            float B = MouseY - ship.Yabs;
-            ship.Angle = (float)(Math.Atan2(A, B)  / Math.PI);
-
-
             if (gameWindow.GameStop == false)
             {
-                ship.Position(ship.positionX + ship.velocityX*ship.speedX, ship.positionY + ship.velocityY * ship.speedY);
+                ship.refresh();
 
-                if (ship.positionX > (gameWindow.XSize / 2) - ship.length) ship.positionX = (gameWindow.XSize / 2 - ship.length);
-                if (ship.positionX < (-gameWindow.XSize / 2)) ship.positionX = -(gameWindow.XSize / 2);
-                if (ship.positionY > (gameWindow.YSize / 2) - ship.heigh) ship.positionY = (gameWindow.YSize / 2 - ship.heigh);
-                if (ship.positionY < (-gameWindow.YSize / 2)) ship.positionY = -(gameWindow.YSize / 2);
-
-
-                if (ship.velocityX > 0) ship.velocityX = ship.velocityX * (float)0.98;
-                if (ship.velocityX < 0) ship.velocityX = ship.velocityX * (float)0.98;
-                if (ship.positionY > 0) ship.positionY = ship.positionY * (float)0.98;
-                if (ship.positionY < 0) ship.positionY = ship.positionY * (float)0.98;
-
-
-                foreach (Bullets bullet in Bullets)
+                if(gameWindow.StopOnWalls == true) // Not Working Good - need to fix this
                 {
+                    if (ship.Xabs > (gameWindow.XSize - ship.length / 2)) ship.Xabs = (gameWindow.XSize - ship.length / 2);
+                    if (ship.Xabs <= (0 + ship.length/2)) ship.Xabs = (0 + ship.length / 2);
+                    if (ship.Yabs > (gameWindow.YSize - ship.heigh / 2)) ship.Yabs = (gameWindow.YSize - ship.heigh / 2);
+                    if (ship.Yabs <= (0 + ship.heigh/2)) ship.Yabs = (0 + ship.heigh / 2);
                 }
+                else if(gameWindow.StopOnWalls == false)
+                {
+                    if (ship.Xabs > gameWindow.XSize) ship.Xabs = (0 + ship.length / 2);
+                    if (ship.Xabs <= 0) ship.Xabs = (gameWindow.XSize - ship.length / 2);
+                    if (ship.Yabs > gameWindow.YSize) ship.Yabs = (0 + ship.heigh / 2);
+                    if (ship.Yabs <= 0) ship.Yabs = (gameWindow.YSize - ship.heigh / 2);
+                }
+
+
+
 
                 bullet1.refresh();
             }
@@ -197,18 +198,14 @@ namespace SimpleGame
 
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                    Bullets.Add(new Bullets()
-                    { Number = 1, Bullet = new Bullet() });
-
-
-                bullet1.Xstart = ship.Xabs;
-                bullet1.Ystart = ship.Yabs;
-                bullet1.Xstop = e.Location.X;
-                bullet1.Ystop = e.Location.Y;
-                bullet1.shoot();           
+                bullet1.shoot(ship.Xabs, ship.Yabs, MouseX, MouseY);
             }
+
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
+                float A = MouseX - ship.Xabs;
+                float B = MouseY - ship.Yabs;
+                ship.Angle = (float)(Math.Atan2(A, B) / Math.PI);
 
                 ship.velocityX = ship.velocityX + (float)Math.Sin(ship.Angle * Math.PI);
                 ship.velocityY = ship.velocityY + (float)Math.Cos(ship.Angle * Math.PI);
