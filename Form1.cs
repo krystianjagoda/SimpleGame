@@ -49,22 +49,31 @@ namespace SimpleGame
             tabControl.Location = new Point(-7, -24);
             canvas.Size = new Size(600, 600);
             gameWindow.SetSize(600, 600);
-
-            StartNewLevel(gameWindow.GameLevel);
+            timerGameTick.Enabled = false;
+            timerRefresh.Enabled = false;
 
         }
 
 
+        public void StopGame()
+        {
+            gameWindow.GameStop = true;
+        }
+
         public void StartNewLevel(int level)
         {
-            gameWindow.NumberOfAsteroids = 2 + level;
+            gameWindow.GameLevel = level;
 
-            ship.Initialize(gameWindow.centerX, gameWindow.centerY);
+            int asteroids = 2 + gameWindow.GameLevel;
 
-            for (int i = 0; i < gameWindow.SetAsteroidsNumber; i++)
+
+
+            for (int i = 0; i < asteroids; i++)
             {
                 Respawn_Asteroid();
             }
+
+            ship.Initialize(gameWindow.centerX, gameWindow.centerY);
 
             RefreshView();
 
@@ -217,6 +226,14 @@ namespace SimpleGame
 
         private void timerGameTick_Tick(object sender, EventArgs e)
         {
+            gameWindow.NumberOfAsteroids = asteroids.Count();
+            if (gameWindow.NumberOfAsteroids == 0)
+            {
+                gameWindow.GameLevel++;
+                StartNewLevel(gameWindow.GameLevel);
+
+            }
+
 
             if (gameWindow.GameStop == false)
             {
@@ -372,6 +389,7 @@ namespace SimpleGame
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
+            Application.Exit();
         }
 
         private void buttonStartGame_Click(object sender, EventArgs e)
@@ -382,6 +400,22 @@ namespace SimpleGame
         private void button2_Click(object sender, EventArgs e)
         {
             tabControl.SelectedIndex = 3;
+            StartNewLevel(1);
+        }
+
+        private void buttonBack3_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = 0;
+        }
+
+        private void buttonBack1_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = 0;
+        }
+
+        private void buttonInfo_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = 4;
         }
     }
 }

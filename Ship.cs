@@ -139,7 +139,7 @@ namespace SimpleGame
         {
             if (Visible)
             {
-                g.FillEllipse(myBrush, X - size / 2, Y - size / 2, size, size);
+                g.FillEllipse(myBrush, X - size / 2, Y - size / 2, size, size);            
             }
         }
 
