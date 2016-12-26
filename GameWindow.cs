@@ -11,6 +11,7 @@ namespace SimpleGame
     {
 
         public int Score = 0;
+        public int GameLevel = 1;
 
         public int NumberOfBullets;
         public int NumberOfAsteroids;

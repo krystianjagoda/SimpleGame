@@ -12,7 +12,7 @@ namespace SimpleGame
 {
     public partial class SimpleGame : Form
     {
-        public bool DebugMode = true;
+        public bool DebugMode = false;
 
 
         Brush myBrush = new SolidBrush(Color.Firebrick);
@@ -37,7 +37,7 @@ namespace SimpleGame
             //     new Bullet(){Name = "bulletB", X = 100, Y = 100, Visible = true },
         };
 
-
+        Random random1 = new Random();
 
         int MouseX = 50;
         int MouseY = 50;
@@ -46,32 +46,24 @@ namespace SimpleGame
         {
             InitializeComponent();
 
+            tabControl.Location = new Point(-7, -24);
             canvas.Size = new Size(600, 600);
             gameWindow.SetSize(600, 600);
-           
+
+            StartNewLevel(gameWindow.GameLevel);
+
+        }
+
+
+        public void StartNewLevel(int level)
+        {
+            gameWindow.NumberOfAsteroids = 2 + level;
 
             ship.Initialize(gameWindow.centerX, gameWindow.centerY);
 
-
-            Random random1 = new Random();
-
-
             for (int i = 0; i < gameWindow.SetAsteroidsNumber; i++)
             {
-                int Xrand = random1.Next(0, 600);
-                int Yrand = random1.Next(0, 600);
-                int VXrand = random1.Next(-50, 50);
-                int VYrand = random1.Next(-50, 50);
-                int Srand = random1.Next(20, 100);
-
-                asteroids.Add(new Asteroid()
-                {
-                    Visible = true,
-                });
-
-                gameWindow.NumberOfAsteroids = asteroids.Count();
-                asteroids[gameWindow.NumberOfAsteroids - 1].Spawn(Xrand, Yrand, VXrand, VYrand, Srand);
-
+                Respawn_Asteroid();
             }
 
             RefreshView();
@@ -81,6 +73,23 @@ namespace SimpleGame
         }
 
 
+        public void Respawn_Asteroid()
+        {
+            int Xrand = random1.Next(0, 600);
+            int Yrand = random1.Next(0, 600);
+            int VXrand = random1.Next(-5, 5);
+            int VYrand = random1.Next(-5, 5);
+            int Srand = random1.Next(20, 100);
+
+            asteroids.Add(new Asteroid()
+            {
+                Visible = true,
+            });
+
+            gameWindow.NumberOfAsteroids = asteroids.Count();
+            asteroids[gameWindow.NumberOfAsteroids - 1].Spawn(Xrand, Yrand, VXrand, VYrand, Srand);
+
+        }
 
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -147,8 +156,8 @@ namespace SimpleGame
         {
             Graphics g = canvas.CreateGraphics();
 
-            Pen myPen = new Pen(whiteBrush, 1);
-            g.DrawLine(myPen, ship.Xabs, ship.Yabs, MouseX, MouseY);
+            Pen whitePen = new Pen(whiteBrush, 1);
+            g.DrawLine(whitePen, ship.Xabs, ship.Yabs, MouseX, MouseY);
 
             
             ship.drawShip(g);
@@ -165,35 +174,34 @@ namespace SimpleGame
                 b.drawBullet(g);
             }
 
-
-
-
         }
 
         public void RefreshView()
         {
             if (DebugMode == true)
             {
+                debugBox.Visible = true;
                 gameWindow.NumberOfBullets = bullets.Count();
                 gameWindow.NumberOfAsteroids = asteroids.Count();
-                debugBox.Visible = true;
                 labelBullets.Text = gameWindow.NumberOfBullets.ToString();
                 labelAsteroids.Text = gameWindow.NumberOfAsteroids.ToString();
-                labelPositionAbs.Text = (ship.Xabs).ToString() + "," + ship.Yabs.ToString();
-                labelSpeed.Text = (ship.velocityX).ToString() + "," + (ship.velocityY).ToString();
+                labelPositionAbs.Text = (ship.Xabs).ToString("F") + "," + ship.Yabs.ToString("F");
+                labelSpeed.Text = (ship.velocityX).ToString("F") + "," + (ship.velocityY).ToString("F");
                 labelSize.Text = (canvas.Size.Height).ToString() + "," + (canvas.Size.Width).ToString();
-                labelAngle.Text = ship.Angle.ToString();
+                labelAngle.Text = ship.Angle.ToString("F");
+            }
+            else
+            {
+                debugBox.Visible = false;
             }
 
             labelScore.Text = gameWindow.Score.ToString();
+            labelLevel.Text = gameWindow.GameLevel.ToString();
             canvas.Refresh();
         }
 
         private void canvas_MouseClick(object sender, MouseEventArgs e)
         {
-
-
-
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
@@ -341,6 +349,39 @@ namespace SimpleGame
             timerGameTick.Enabled = false;
             timerGameTick.Interval = (int)(numericUpDown1.Value);
             timerGameTick.Enabled = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            StartNewLevel(gameWindow.GameLevel);
+            gameWindow.GameLevel++;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            DebugMode = !DebugMode;
+            if(DebugMode == true)
+            {
+                checkBox1.Checked = true;
+            }
+            else if(DebugMode == false)
+            {
+                checkBox1.Checked = false;
+            }
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void buttonStartGame_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = 1;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = 3;
         }
     }
 }

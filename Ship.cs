@@ -168,8 +168,8 @@ namespace SimpleGame
         public float velocityX = 0;
         public float velocityY = 0;
 
-        public float speedX = 30;
-        public float speedY = 30;
+        public float speedX = 20;
+        public float speedY = 20;
 
 
 
