@@ -14,6 +14,11 @@ namespace SimpleGame
 
         Color color = Color.Firebrick;
 
+        public char Type = 'A';
+
+        public int Ammo = 100;
+        public int Ultimate = 10;
+
         public int heigh = 20;
         public int length = 20;
          
@@ -67,6 +72,7 @@ namespace SimpleGame
         Brush myBrush = new SolidBrush(Color.White);
 
         public float size = 50;
+        public float HP = 50;
 
         public string Name = "asteroidX";
 
@@ -105,6 +111,8 @@ namespace SimpleGame
         {
             this.size = Size;
 
+            this.HP = Size;
+
             this.X = X;
             this.Y = Y;
 
@@ -124,6 +132,7 @@ namespace SimpleGame
         public void refresh()
         {
             Position(this.X + this.velocityX * this.speedX, this.Y + this.velocityY * this.speedY);
+            this.size = this.HP;
         }
 
         public bool isInRange(float X1, float Y1, float X2, float Y2)
@@ -170,7 +179,6 @@ namespace SimpleGame
 
         public float speedX = 20;
         public float speedY = 20;
-
 
 
         public void shoot(float Xstart, float Ystart, float Xstop, float Ystop)

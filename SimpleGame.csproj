@@ -66,6 +66,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -79,6 +80,63 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Asteroida.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\controlkey.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeftKey.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RightKey.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spacekey.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\controlkey2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeftKey2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RightKey2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spacekey2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\controlkey4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spacekey3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\empty.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hit.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hit2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shoot.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shoot2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ulti.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\P.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\X.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
