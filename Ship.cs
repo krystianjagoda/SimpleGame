@@ -16,8 +16,10 @@ namespace SimpleGame
 
         public char Type = 'A';
 
-        public int Ammo = 100;
+        public int Ammo = 30;
         public int Ultimate = 10;
+        public int HP = 100;
+        public int Fuel = 200;
 
         public int heigh = 20;
         public int length = 20;
@@ -36,6 +38,13 @@ namespace SimpleGame
         public double slowdown = 0.98;
 
 
+        public void Reset()
+        {
+            Ammo = 30;
+            Ultimate = 10;
+            HP = 100;
+            Fuel = 200;
+        }
 
         public void Initialize(float Xinit, float Yinit)
         {
@@ -65,11 +74,26 @@ namespace SimpleGame
 
     }
 
-    class Asteroid
+    public class Asteroid
     {
 
-        Pen myPen = new Pen(Color.White);
-        Brush myBrush = new SolidBrush(Color.White);
+        List<Brush> brushes = new List<Brush> {
+            new SolidBrush(Color.AntiqueWhite),
+            new SolidBrush(Color.Gainsboro),
+            new SolidBrush(Color.LightGray),
+            new SolidBrush(Color.Silver),
+            new SolidBrush(Color.DarkGray),
+            new SolidBrush(Color.LightGreen),
+            new SolidBrush(Color.LightSkyBlue),
+            new SolidBrush(Color.LightSteelBlue),
+            new SolidBrush(Color.Tan),
+            new SolidBrush(Color.BurlyWood),
+            new SolidBrush(Color.LightPink),
+        };
+
+        Pen myWhitePen = new Pen(Color.White);
+
+        public int Colore = 0;
 
         public float size = 50;
         public float HP = 50;
@@ -107,9 +131,10 @@ namespace SimpleGame
         }
 
 
-        public void Spawn(float X, float Y, float Xspeed, float Yspeed, float Size)
+        public void Spawn(float X, float Y, float Xspeed, float Yspeed, float Size, int Colo)
         {
             this.size = Size;
+            this.Colore = Colo;
 
             this.HP = Size;
 
@@ -144,17 +169,70 @@ namespace SimpleGame
             else return true;
         }
 
-        public void draw(Graphics g)
+        public virtual void draw(Graphics g)
         {
             if (Visible)
             {
-                g.FillEllipse(myBrush, X - size / 2, Y - size / 2, size, size);            
+                g.FillEllipse(brushes[Colore], X - size / 2, Y - size / 2, size, size);
+                g.DrawEllipse(myWhitePen, X - size / 2, Y - size / 2, size, size);          
             }
         }
 
     }
 
 
+    public class BonusAmmo : Asteroid
+    {
+        
+        Brush myGreenBrush = new SolidBrush(Color.Green);
+        Brush myYellowBrush = new SolidBrush(Color.Yellow);
+        Pen myYellowPen = new Pen(Color.Yellow);
+
+        public override void draw(Graphics g)
+        {
+            g.FillRectangle(myGreenBrush, X - 10, Y - 10, 20, 20);
+            g.FillEllipse(myYellowBrush, X - 4, Y - 4, 8, 8);
+            g.DrawRectangle(myYellowPen, X - 10, Y - 10, 20, 20);
+        }
+
+    }
+
+
+    public class BonusHP : Asteroid
+    {
+
+        Brush myRedBrush = new SolidBrush(Color.Red);
+        Brush myWhiteBrush = new SolidBrush(Color.White);
+        Pen myWhitePen = new Pen(Color.White);
+
+        public override void draw(Graphics g)
+        {
+            g.FillRectangle(myRedBrush, X - 10, Y - 10, 20, 20);
+
+            g.FillRectangle(myWhiteBrush, X - 2,  Y-10,  5, 20);
+            g.FillRectangle(myWhiteBrush, X - 10, Y-2 , 20, 5);
+
+            g.DrawRectangle(myWhitePen, X - 10, Y - 10, 20, 20);
+        }
+
+    }
+
+
+    public class BonusFuel : Asteroid
+    {
+
+        Brush myGreenBrush = new SolidBrush(Color.Green);
+        Brush myWhiteBrush = new SolidBrush(Color.White);
+        Pen myGreenPen = new Pen(Color.Green);
+
+        public override void draw(Graphics g)
+        {
+            g.FillRectangle(myWhiteBrush, X - 10, Y - 10, 20, 20);
+            g.FillEllipse(myGreenBrush, X - 8, Y - 8, 16, 16);
+            g.DrawRectangle(myGreenPen, X - 10, Y - 10, 20, 20);
+        }
+
+    }
 
 
     class Bullet

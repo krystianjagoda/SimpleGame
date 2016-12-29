@@ -13,10 +13,13 @@ namespace SimpleGame
 {
     public partial class SimpleGame : Form
     {
+
+        public string Info = "SimpleGame v0.07 29-12-2016";
+
         public bool DebugMode = false;
 
-        SoundPlayer soundShoot = new SoundPlayer(Properties.Resources.shoot);
-        SoundPlayer soundUlti = new SoundPlayer(Properties.Resources.ulti);
+        SoundPlayer soundShoot = new SoundPlayer(Properties.Resources.ulti);
+        SoundPlayer soundUlti = new SoundPlayer(Properties.Resources.shoot);
         SoundPlayer soundEmpty = new SoundPlayer(Properties.Resources.empty);
         SoundPlayer soundHit = new SoundPlayer(Properties.Resources.hit);
         SoundPlayer soundHit2 = new SoundPlayer(Properties.Resources.hit2);
@@ -24,6 +27,7 @@ namespace SimpleGame
 
         Brush myBrush = new SolidBrush(Color.Firebrick);
         Brush whiteBrush = new SolidBrush(Color.White);
+        
 
 
 
@@ -35,14 +39,19 @@ namespace SimpleGame
         List<Bullet> bullets = new List<Bullet>
         {
         //     new Bullet(){Name = "bulletA", X = 200, Y = 200, Visible = true },
-        //     new Bullet(){Name = "bulletB", X = 100, Y = 100, Visible = true },
         };
 
         List<Asteroid> asteroids = new List<Asteroid>
         {
           //       new Asteroid(){Name = "bulletA", X = 200, Y = 200, Visible = true },
-            //     new Bullet(){Name = "bulletB", X = 100, Y = 100, Visible = true },
         };
+
+        List<Asteroid> bonuses = new List<Asteroid> {
+                   new BonusAmmo(){Name = "AmmoA", X = 200, Y = 200},
+                   new BonusHP(){Name = "HPA", X = 250, Y = 200},
+                   new BonusFuel(){Name = "HPA", X = 300, Y = 200},
+        };
+
 
         Random random1 = new Random();
 
@@ -57,10 +66,16 @@ namespace SimpleGame
             canvas.Size = new Size(600, 600);
             gameWindow.SetSize(600, 600);
             timerGameTick.Enabled = false;
-            timerRefresh.Enabled = false;
-
+            timerRefresh.Enabled = true;
         }
 
+
+        public void ResetGame()
+        {
+            ship.Reset();
+            gameWindow.Score = 0;
+            gameWindow.GameLevel = 1;           
+        }
 
         public void Ultimate()
         {
@@ -72,7 +87,8 @@ namespace SimpleGame
                     {
                         bullets.Add(new Bullet() { Visible = true, });
                     }
-                    
+
+
                     gameWindow.NumberOfBullets = bullets.Count();
 
                     bullets[gameWindow.NumberOfBullets - 1].shoot(ship.Xabs, ship.Yabs, ship.Xabs + 0, ship.Yabs + 20);
@@ -101,6 +117,11 @@ namespace SimpleGame
 
         public void StartNewLevel(int level)
         {
+            gameWindow.GameStop = true;
+            labelPopUp.Text = "Level " + gameWindow.GameLevel;
+            labelPopUp.Visible = true;
+            timerPopUp.Enabled = true;
+
             gameWindow.GameLevel = level;
 
             int asteroids = 2 + gameWindow.GameLevel;
@@ -112,6 +133,8 @@ namespace SimpleGame
                 Respawn_Asteroid();
             }
 
+            ship.velocityX = 0;
+            ship.velocityY = 0;
             ship.Initialize(gameWindow.centerX, gameWindow.centerY);
 
             RefreshView();
@@ -125,9 +148,20 @@ namespace SimpleGame
         {
             int Xrand = random1.Next(0, 600);
             int Yrand = random1.Next(0, 600);
-            int VXrand = random1.Next(-5, 5);
-            int VYrand = random1.Next(-5, 5);
-            int Srand = random1.Next(20, 100);
+            int VXrand = random1.Next(-10 -gameWindow.GameLevel, 10 + gameWindow.GameLevel);
+            int VYrand = random1.Next(-10 - -gameWindow.GameLevel, 10 + gameWindow.GameLevel);
+            int Srand = random1.Next(20 + gameWindow.GameLevel * 5, 100+ gameWindow.GameLevel*5);
+            int Crand = random1.Next(0, 10);
+
+            if(Xrand > 250 && Xrand < 350)
+            {
+                Xrand = random1.Next(0, 600);
+            }
+
+            if (Yrand > 250 && Yrand < 350)
+            {
+                Yrand = random1.Next(0, 600);
+            }
 
             asteroids.Add(new Asteroid()
             {
@@ -135,7 +169,7 @@ namespace SimpleGame
             });
 
             gameWindow.NumberOfAsteroids = asteroids.Count();
-            asteroids[gameWindow.NumberOfAsteroids - 1].Spawn(Xrand, Yrand, VXrand, VYrand, Srand);
+            asteroids[gameWindow.NumberOfAsteroids - 1].Spawn(Xrand, Yrand, VXrand, VYrand, Srand, Crand);
 
         }
 
@@ -214,7 +248,7 @@ namespace SimpleGame
             g.DrawLine(whitePen, ship.Xabs, ship.Yabs, MouseX, MouseY);
 
             
-            ship.drawShip(g);
+            
 
             foreach (Asteroid a in asteroids)
             {
@@ -225,6 +259,13 @@ namespace SimpleGame
             {
                 b.drawBullet(g);
             }
+
+
+            bonuses[0].draw(g);
+            bonuses[1].draw(g);
+            bonuses[2].draw(g);
+
+            ship.drawShip(g);
 
         }
 
@@ -251,6 +292,8 @@ namespace SimpleGame
             labelLevel.Text = gameWindow.GameLevel.ToString();
             labelAmmo.Text = ship.Ammo.ToString();
             labelUltimate.Text = ship.Ultimate.ToString();
+            labelHP.Text = ship.HP.ToString() + " / 100";
+            labelFuel.Text = ship.Fuel.ToString() + " / 200";
 
 
             canvas.Refresh();
@@ -277,6 +320,7 @@ namespace SimpleGame
             if (gameWindow.NumberOfAsteroids == 0)
             {
                 gameWindow.GameLevel++;
+                ship.Reset();
                 StartNewLevel(gameWindow.GameLevel);
 
             }
@@ -300,8 +344,6 @@ namespace SimpleGame
                     if (ship.Yabs > gameWindow.YSize) ship.Yabs = (0 + ship.heigh / 2);
                     if (ship.Yabs <= 0) ship.Yabs = (gameWindow.YSize - ship.heigh / 2);
                 }
-
-                bullet1.refresh();
 
                 foreach (Bullet b in bullets)
                 {
@@ -332,7 +374,22 @@ namespace SimpleGame
                     if (a.Y > gameWindow.YSize)     a.Y = 0;
                     if (a.Y < 0)                    a.Y = gameWindow.YSize;
 
-                    foreach (Bullet b in bullets)
+                    if (((a.X - ship.Xabs) * (a.X - ship.Xabs) + (a.Y - ship.Yabs) * (a.Y - ship.Yabs)) - ((a.size / 2) * (a.size / 2)) < 10)
+                    {
+                        ship.HP = ship.HP - 3;                        
+                        if(ship.HP < 0)
+                        {
+                            ship.HP = 0;
+                            labelScoreFinall.Text = "Score: " + gameWindow.Score.ToString();
+                            labelLevelFinall.Text = "Level: " + gameWindow.GameLevel.ToString();
+                            tabControl.SelectedIndex = 4;   // Go to Score;
+                            soundHit.Play();
+                            break;
+                        }
+
+                    }
+
+                        foreach (Bullet b in bullets)
                     {
                         if (((a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y)) - ((a.size/2)*(a.size/2)) < 10)
                         {
@@ -373,48 +430,53 @@ namespace SimpleGame
 
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-
-                if(ship.Ammo > 0)
+                if (gameWindow.GameStop == false)
                 {
-                    ship.Ammo--;
-
-                    bullets.Add(new Bullet()
+                    if (ship.Ammo > 0)
                     {
-                        Visible = true,
-                    });
+                        ship.Ammo--;
 
-                    gameWindow.NumberOfBullets = bullets.Count();
+                        bullets.Add(new Bullet()
+                        {
+                            Visible = true,
+                        });
 
-                    bullets[gameWindow.NumberOfBullets - 1].shoot(ship.Xabs, ship.Yabs, MouseX, MouseY);
+                        gameWindow.NumberOfBullets = bullets.Count();
 
-                    try
-                    {
+                        bullets[gameWindow.NumberOfBullets - 1].shoot(ship.Xabs, ship.Yabs, MouseX, MouseY);
                         soundShoot.Play();
                     }
-                    catch(Exception ex){ }
-                }
-                else
-                {
-                    soundEmpty.Play();
-                }
 
-
+                    else
+                    {
+                        soundEmpty.Play();
+                    }
+                }
             }
+
 
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                float A = MouseX - ship.Xabs;
-                float B = MouseY - ship.Yabs;
-                ship.Angle = (float)(Math.Atan2(A, B) / Math.PI);
+                if (gameWindow.GameStop == false)
+                {
+                    float A = MouseX - ship.Xabs;
+                    float B = MouseY - ship.Yabs;
+                    ship.Angle = (float)(Math.Atan2(A, B) / Math.PI);
 
-                ship.velocityX = ship.velocityX + (float)Math.Sin(ship.Angle * Math.PI);
-                ship.velocityY = ship.velocityY + (float)Math.Cos(ship.Angle * Math.PI);
+                    if (ship.Fuel > 0)
+                    {
+                        ship.velocityX = ship.velocityX + (float)Math.Sin(ship.Angle * Math.PI);
+                        ship.velocityY = ship.velocityY + (float)Math.Cos(ship.Angle * Math.PI);
+                    }
+
+
+                    ship.Fuel = ship.Fuel - 10;
+                    if (ship.Fuel < 0) ship.Fuel = 0;
+                }
             }
 
-
-
-
-        }
+         }
+        
 
         private void buttonStopGame_Click(object sender, EventArgs e)
         {
@@ -470,59 +532,80 @@ namespace SimpleGame
 
         private void buttonStartGame_Click(object sender, EventArgs e)
         {
+            ResetGame();
             tabControl.SelectedIndex = 1; // Go to ShipSelection
+            soundHit.Play();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             tabControl.SelectedIndex = 3;
+            soundHit.Play();
+            ResetGame();
             StartNewLevel(1);
         }
 
         private void buttonBack3_Click(object sender, EventArgs e)
         {
             tabControl.SelectedIndex = 0;  // Move back to MainMenu
+            soundHit.Play();
         }
 
         private void buttonBack1_Click(object sender, EventArgs e)
         {
             tabControl.SelectedIndex = 0;   // Move back to MainMenu
+            soundHit.Play();
         }
 
         private void buttonInfo_Click(object sender, EventArgs e)
         {
             tabControl.SelectedIndex = 6;   // Go to Info
+            soundHit.Play();
+            labelInfo.Text = Info;
         }
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
             tabControl.SelectedIndex = 5;   // Go to Settings
+            soundHit.Play();
         }
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
             tabControl.SelectedIndex = 2;   // Go to How to Play
+            soundHit.Play();
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
             tabControl.SelectedIndex = 3;   // Start New Game
+            soundHit.Play();
             StartNewLevel(1);
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
             tabControl.SelectedIndex = 1;   // Move back to ShipSelection
+            soundHit.Play();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             tabControl.SelectedIndex = 0;   // Move back to MainMenu
+            soundHit.Play();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             tabControl.SelectedIndex = 0;   // Move back to MainMenu
+            soundHit.Play();
+        }
+
+        private void timerPopUp_Tick(object sender, EventArgs e)
+        {
+            labelPopUp.Visible = false;
+            timerPopUp.Enabled = false;
+            gameWindow.GameStop = false;
         }
     }
 }

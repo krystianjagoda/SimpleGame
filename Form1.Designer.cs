@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SimpleGame));
             this.labelpos = new System.Windows.Forms.Label();
             this.timerRefresh = new System.Windows.Forms.Timer(this.components);
             this.canvas = new System.Windows.Forms.Panel();
@@ -52,13 +53,17 @@
             this.label7 = new System.Windows.Forms.Label();
             this.timerGameTick = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelHP = new System.Windows.Forms.Label();
+            this.label90 = new System.Windows.Forms.Label();
+            this.labelUltimate = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.labelAmmo = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
-            this.progressBar5 = new System.Windows.Forms.ProgressBar();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.labelLevel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonInfo = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
@@ -67,6 +72,7 @@
             this.tabMainMenu = new System.Windows.Forms.TabPage();
             this.tabMenu2 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.progressBar4 = new System.Windows.Forms.ProgressBar();
@@ -88,41 +94,48 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.tabGameWindow = new System.Windows.Forms.TabPage();
-            this.tabScore = new System.Windows.Forms.TabPage();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tabSettings = new System.Windows.Forms.TabPage();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.tabInfo = new System.Windows.Forms.TabPage();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.buttonBack3 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.labelUltimate = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.tabGameWindow = new System.Windows.Forms.TabPage();
+            this.tabScore = new System.Windows.Forms.TabPage();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.labelScoreFinall = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tabSettings = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.tabInfo = new System.Windows.Forms.TabPage();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.labelInfo = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.buttonBack3 = new System.Windows.Forms.Button();
+            this.labelLevelFinall = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.labelFuel = new System.Windows.Forms.Label();
+            this.labelPopUp = new System.Windows.Forms.Label();
+            this.timerPopUp = new System.Windows.Forms.Timer(this.components);
+            this.labelPaused = new System.Windows.Forms.Label();
             this.canvas.SuspendLayout();
             this.debugBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panelMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabMainMenu.SuspendLayout();
             this.tabMenu2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabHowtoPlay.SuspendLayout();
             this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabGameWindow.SuspendLayout();
             this.tabScore.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -130,11 +143,6 @@
             this.panel3.SuspendLayout();
             this.tabInfo.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // labelpos
@@ -148,13 +156,15 @@
             // 
             // timerRefresh
             // 
-            this.timerRefresh.Interval = 30;
+            this.timerRefresh.Interval = 20;
             this.timerRefresh.Tick += new System.EventHandler(this.timerRefresh_Tick);
             // 
             // canvas
             // 
             this.canvas.AutoSize = true;
-            this.canvas.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.canvas.BackColor = System.Drawing.Color.SteelBlue;
+            this.canvas.Controls.Add(this.labelPaused);
+            this.canvas.Controls.Add(this.labelPopUp);
             this.canvas.Controls.Add(this.debugBox);
             this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
             this.canvas.Location = new System.Drawing.Point(3, 23);
@@ -357,7 +367,7 @@
             // labelScore
             // 
             this.labelScore.AutoSize = true;
-            this.labelScore.Location = new System.Drawing.Point(46, 4);
+            this.labelScore.Location = new System.Drawing.Point(47, 5);
             this.labelScore.Name = "labelScore";
             this.labelScore.Size = new System.Drawing.Size(13, 13);
             this.labelScore.TabIndex = 5;
@@ -366,7 +376,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(2, 4);
+            this.label7.Location = new System.Drawing.Point(3, 4);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(38, 13);
             this.label7.TabIndex = 4;
@@ -374,16 +384,19 @@
             // 
             // timerGameTick
             // 
-            this.timerGameTick.Interval = 10;
+            this.timerGameTick.Interval = 5;
             this.timerGameTick.Tick += new System.EventHandler(this.timerGameTick_Tick);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.labelFuel);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.labelHP);
+            this.panel1.Controls.Add(this.label90);
             this.panel1.Controls.Add(this.labelUltimate);
             this.panel1.Controls.Add(this.label19);
             this.panel1.Controls.Add(this.labelAmmo);
             this.panel1.Controls.Add(this.label50);
-            this.panel1.Controls.Add(this.progressBar5);
             this.panel1.Controls.Add(this.checkBox1);
             this.panel1.Controls.Add(this.labelLevel);
             this.panel1.Controls.Add(this.label8);
@@ -394,10 +407,46 @@
             this.panel1.Size = new System.Drawing.Size(600, 20);
             this.panel1.TabIndex = 4;
             // 
+            // labelHP
+            // 
+            this.labelHP.AutoSize = true;
+            this.labelHP.Location = new System.Drawing.Point(376, 5);
+            this.labelHP.Name = "labelHP";
+            this.labelHP.Size = new System.Drawing.Size(48, 13);
+            this.labelHP.TabIndex = 14;
+            this.labelHP.Text = "100/100";
+            // 
+            // label90
+            // 
+            this.label90.AutoSize = true;
+            this.label90.Location = new System.Drawing.Point(345, 5);
+            this.label90.Name = "label90";
+            this.label90.Size = new System.Drawing.Size(25, 13);
+            this.label90.TabIndex = 13;
+            this.label90.Text = "HP:";
+            // 
+            // labelUltimate
+            // 
+            this.labelUltimate.AutoSize = true;
+            this.labelUltimate.Location = new System.Drawing.Point(313, 5);
+            this.labelUltimate.Name = "labelUltimate";
+            this.labelUltimate.Size = new System.Drawing.Size(13, 13);
+            this.labelUltimate.TabIndex = 12;
+            this.labelUltimate.Text = "0";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(262, 4);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(48, 13);
+            this.label19.TabIndex = 11;
+            this.label19.Text = "Ultimate:";
+            // 
             // labelAmmo
             // 
             this.labelAmmo.AutoSize = true;
-            this.labelAmmo.Location = new System.Drawing.Point(223, 4);
+            this.labelAmmo.Location = new System.Drawing.Point(220, 5);
             this.labelAmmo.Name = "labelAmmo";
             this.labelAmmo.Size = new System.Drawing.Size(13, 13);
             this.labelAmmo.TabIndex = 10;
@@ -406,36 +455,26 @@
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(178, 4);
+            this.label50.Location = new System.Drawing.Point(175, 5);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(39, 13);
             this.label50.TabIndex = 9;
             this.label50.Text = "Ammo:";
             // 
-            // progressBar5
-            // 
-            this.progressBar5.BackColor = System.Drawing.Color.MediumAquamarine;
-            this.progressBar5.Location = new System.Drawing.Point(397, 4);
-            this.progressBar5.Name = "progressBar5";
-            this.progressBar5.Size = new System.Drawing.Size(76, 13);
-            this.progressBar5.TabIndex = 4;
-            this.progressBar5.Value = 60;
-            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(534, 3);
+            this.checkBox1.Location = new System.Drawing.Point(576, 4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(58, 17);
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
             this.checkBox1.TabIndex = 8;
-            this.checkBox1.Text = "Debug";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // labelLevel
             // 
             this.labelLevel.AutoSize = true;
-            this.labelLevel.Location = new System.Drawing.Point(133, 4);
+            this.labelLevel.Location = new System.Drawing.Point(130, 5);
             this.labelLevel.Name = "labelLevel";
             this.labelLevel.Size = new System.Drawing.Size(13, 13);
             this.labelLevel.TabIndex = 7;
@@ -444,7 +483,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(91, 4);
+            this.label8.Location = new System.Drawing.Point(88, 5);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(36, 13);
             this.label8.TabIndex = 6;
@@ -463,11 +502,20 @@
             this.panelMenu.Size = new System.Drawing.Size(600, 640);
             this.panelMenu.TabIndex = 4;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::SimpleGame.Properties.Resources.Asteroida;
+            this.pictureBox1.Location = new System.Drawing.Point(148, 34);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(306, 316);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
             // buttonExit
             // 
             this.buttonExit.BackColor = System.Drawing.Color.White;
             this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExit.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonExit.Location = new System.Drawing.Point(225, 530);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(150, 35);
@@ -480,7 +528,7 @@
             // 
             this.buttonInfo.BackColor = System.Drawing.Color.White;
             this.buttonInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonInfo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonInfo.Location = new System.Drawing.Point(225, 480);
             this.buttonInfo.Name = "buttonInfo";
             this.buttonInfo.Size = new System.Drawing.Size(150, 35);
@@ -493,7 +541,7 @@
             // 
             this.buttonSettings.BackColor = System.Drawing.Color.White;
             this.buttonSettings.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSettings.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSettings.Location = new System.Drawing.Point(225, 430);
             this.buttonSettings.Name = "buttonSettings";
             this.buttonSettings.Size = new System.Drawing.Size(150, 35);
@@ -506,7 +554,7 @@
             // 
             this.buttonStartGame.BackColor = System.Drawing.Color.White;
             this.buttonStartGame.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonStartGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStartGame.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStartGame.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonStartGame.Location = new System.Drawing.Point(225, 380);
             this.buttonStartGame.Name = "buttonStartGame";
@@ -573,6 +621,18 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(600, 640);
             this.panel2.TabIndex = 5;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.White;
+            this.label14.Location = new System.Drawing.Point(252, 17);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(106, 20);
+            this.label14.TabIndex = 17;
+            this.label14.Text = "Select Ship:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label18
             // 
@@ -654,7 +714,7 @@
             // 
             this.buttonBack1.BackColor = System.Drawing.Color.White;
             this.buttonBack1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonBack1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBack1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBack1.Location = new System.Drawing.Point(225, 530);
             this.buttonBack1.Name = "buttonBack1";
             this.buttonBack1.Size = new System.Drawing.Size(150, 35);
@@ -693,7 +753,7 @@
             // 
             this.buttonNext.BackColor = System.Drawing.Color.White;
             this.buttonNext.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNext.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonNext.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonNext.Location = new System.Drawing.Point(225, 380);
             this.buttonNext.Name = "buttonNext";
@@ -737,7 +797,7 @@
             // 
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(225, 530);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(150, 35);
@@ -749,19 +809,19 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.White;
             this.label25.Location = new System.Drawing.Point(77, 87);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(332, 16);
+            this.label25.Size = new System.Drawing.Size(333, 16);
             this.label25.TabIndex = 17;
-            this.label25.Text = "Shoot the Asteroids, Pick Fuel and Ammunition.";
+            this.label25.Text = "Shoot the Asteroids, Pick up Fuel and Ammunition.";
             // 
             // buttonStart
             // 
             this.buttonStart.BackColor = System.Drawing.Color.White;
             this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStart.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStart.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonStart.Location = new System.Drawing.Point(225, 380);
             this.buttonStart.Name = "buttonStart";
@@ -774,246 +834,46 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.Color.White;
             this.label24.Location = new System.Drawing.Point(206, 165);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(60, 16);
+            this.label24.Size = new System.Drawing.Size(55, 16);
             this.label24.TabIndex = 15;
             this.label24.Text = "Engine:";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.White;
             this.label23.Location = new System.Drawing.Point(328, 165);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(69, 16);
+            this.label23.Size = new System.Drawing.Size(66, 16);
             this.label23.TabIndex = 14;
             this.label23.Text = "Ultimate:";
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.Color.White;
             this.label22.Location = new System.Drawing.Point(439, 165);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(101, 16);
+            this.label22.Size = new System.Drawing.Size(91, 16);
             this.label22.TabIndex = 13;
             this.label22.Text = "Pause Game:";
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.White;
             this.label21.Location = new System.Drawing.Point(81, 165);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(52, 16);
+            this.label21.Size = new System.Drawing.Size(51, 16);
             this.label21.TabIndex = 12;
             this.label21.Text = "Shoot:";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.Color.White;
-            this.label20.Location = new System.Drawing.Point(252, 17);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(112, 20);
-            this.label20.TabIndex = 7;
-            this.label20.Text = "How To Play:";
-            // 
-            // tabGameWindow
-            // 
-            this.tabGameWindow.Controls.Add(this.canvas);
-            this.tabGameWindow.Controls.Add(this.panel1);
-            this.tabGameWindow.Location = new System.Drawing.Point(4, 22);
-            this.tabGameWindow.Name = "tabGameWindow";
-            this.tabGameWindow.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGameWindow.Size = new System.Drawing.Size(606, 624);
-            this.tabGameWindow.TabIndex = 0;
-            this.tabGameWindow.Text = "GameWindow";
-            this.tabGameWindow.UseVisualStyleBackColor = true;
-            // 
-            // tabScore
-            // 
-            this.tabScore.Controls.Add(this.panel5);
-            this.tabScore.Location = new System.Drawing.Point(4, 22);
-            this.tabScore.Name = "tabScore";
-            this.tabScore.Size = new System.Drawing.Size(606, 624);
-            this.tabScore.TabIndex = 5;
-            this.tabScore.Text = "Score";
-            this.tabScore.UseVisualStyleBackColor = true;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.panel5.Controls.Add(this.button5);
-            this.panel5.Controls.Add(this.label13);
-            this.panel5.Location = new System.Drawing.Point(3, 2);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(600, 640);
-            this.panel5.TabIndex = 7;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(246, 141);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(97, 16);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "GAME OVER";
-            // 
-            // tabSettings
-            // 
-            this.tabSettings.Controls.Add(this.panel3);
-            this.tabSettings.Location = new System.Drawing.Point(4, 22);
-            this.tabSettings.Name = "tabSettings";
-            this.tabSettings.Size = new System.Drawing.Size(606, 624);
-            this.tabSettings.TabIndex = 3;
-            this.tabSettings.Text = "Settings";
-            this.tabSettings.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.panel3.Controls.Add(this.button6);
-            this.panel3.Location = new System.Drawing.Point(3, 2);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(600, 640);
-            this.panel3.TabIndex = 5;
-            // 
-            // tabInfo
-            // 
-            this.tabInfo.Controls.Add(this.panel4);
-            this.tabInfo.Location = new System.Drawing.Point(4, 22);
-            this.tabInfo.Name = "tabInfo";
-            this.tabInfo.Size = new System.Drawing.Size(606, 624);
-            this.tabInfo.TabIndex = 4;
-            this.tabInfo.Text = "Info";
-            this.tabInfo.UseVisualStyleBackColor = true;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.panel4.Controls.Add(this.label12);
-            this.panel4.Controls.Add(this.label11);
-            this.panel4.Controls.Add(this.label10);
-            this.panel4.Controls.Add(this.label9);
-            this.panel4.Controls.Add(this.buttonBack3);
-            this.panel4.Location = new System.Drawing.Point(3, 2);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(600, 640);
-            this.panel4.TabIndex = 6;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(188, 131);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(90, 16);
-            this.label12.TabIndex = 8;
-            this.label12.Text = "LMB : Shoot";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(188, 102);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(103, 16);
-            this.label11.TabIndex = 7;
-            this.label11.Text = "RMB : Torque";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(188, 76);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(145, 16);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "SPACEBAR : Pause";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(203, 453);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(197, 16);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "krystianjagoda@gmail.com";
-            // 
-            // buttonBack3
-            // 
-            this.buttonBack3.BackColor = System.Drawing.Color.White;
-            this.buttonBack3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonBack3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBack3.Location = new System.Drawing.Point(225, 530);
-            this.buttonBack3.Name = "buttonBack3";
-            this.buttonBack3.Size = new System.Drawing.Size(150, 35);
-            this.buttonBack3.TabIndex = 4;
-            this.buttonBack3.Text = "Back";
-            this.buttonBack3.UseVisualStyleBackColor = false;
-            this.buttonBack3.Click += new System.EventHandler(this.buttonBack3_Click);
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.White;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(225, 530);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(150, 35);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "Back";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.Color.White;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(225, 530);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(150, 35);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "Back";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(252, 17);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(106, 20);
-            this.label14.TabIndex = 17;
-            this.label14.Text = "Select Ship:";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::SimpleGame.Properties.Resources.Asteroida;
-            this.pictureBox1.Location = new System.Drawing.Point(148, 34);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(306, 316);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
             // 
             // pictureBox5
             // 
@@ -1051,23 +911,248 @@
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
             // 
-            // label19
+            // label20
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(262, 4);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(48, 13);
-            this.label19.TabIndex = 11;
-            this.label19.Text = "Ultimate:";
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.White;
+            this.label20.Location = new System.Drawing.Point(252, 17);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(112, 20);
+            this.label20.TabIndex = 7;
+            this.label20.Text = "How To Play:";
             // 
-            // labelUltimate
+            // tabGameWindow
             // 
-            this.labelUltimate.AutoSize = true;
-            this.labelUltimate.Location = new System.Drawing.Point(316, 4);
-            this.labelUltimate.Name = "labelUltimate";
-            this.labelUltimate.Size = new System.Drawing.Size(13, 13);
-            this.labelUltimate.TabIndex = 12;
-            this.labelUltimate.Text = "0";
+            this.tabGameWindow.Controls.Add(this.canvas);
+            this.tabGameWindow.Controls.Add(this.panel1);
+            this.tabGameWindow.Location = new System.Drawing.Point(4, 22);
+            this.tabGameWindow.Name = "tabGameWindow";
+            this.tabGameWindow.Padding = new System.Windows.Forms.Padding(3);
+            this.tabGameWindow.Size = new System.Drawing.Size(606, 624);
+            this.tabGameWindow.TabIndex = 0;
+            this.tabGameWindow.Text = "GameWindow";
+            this.tabGameWindow.UseVisualStyleBackColor = true;
+            // 
+            // tabScore
+            // 
+            this.tabScore.Controls.Add(this.panel5);
+            this.tabScore.Location = new System.Drawing.Point(4, 22);
+            this.tabScore.Name = "tabScore";
+            this.tabScore.Size = new System.Drawing.Size(606, 624);
+            this.tabScore.TabIndex = 5;
+            this.tabScore.Text = "Score";
+            this.tabScore.UseVisualStyleBackColor = true;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.panel5.Controls.Add(this.labelLevelFinall);
+            this.panel5.Controls.Add(this.labelScoreFinall);
+            this.panel5.Controls.Add(this.button5);
+            this.panel5.Controls.Add(this.label13);
+            this.panel5.Location = new System.Drawing.Point(3, 2);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(600, 640);
+            this.panel5.TabIndex = 7;
+            // 
+            // labelScoreFinall
+            // 
+            this.labelScoreFinall.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelScoreFinall.ForeColor = System.Drawing.Color.White;
+            this.labelScoreFinall.Location = new System.Drawing.Point(20, 192);
+            this.labelScoreFinall.Name = "labelScoreFinall";
+            this.labelScoreFinall.Size = new System.Drawing.Size(561, 33);
+            this.labelScoreFinall.TabIndex = 9;
+            this.labelScoreFinall.Text = "Score:";
+            this.labelScoreFinall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Location = new System.Drawing.Point(225, 530);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(150, 35);
+            this.button5.TabIndex = 8;
+            this.button5.Text = "Back";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // label13
+            // 
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(16, 80);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(565, 29);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "GAME OVER";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tabSettings
+            // 
+            this.tabSettings.Controls.Add(this.panel3);
+            this.tabSettings.Location = new System.Drawing.Point(4, 22);
+            this.tabSettings.Name = "tabSettings";
+            this.tabSettings.Size = new System.Drawing.Size(606, 624);
+            this.tabSettings.TabIndex = 3;
+            this.tabSettings.Text = "Settings";
+            this.tabSettings.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.panel3.Controls.Add(this.checkBox2);
+            this.panel3.Controls.Add(this.button6);
+            this.panel3.Location = new System.Drawing.Point(3, 2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(600, 640);
+            this.panel3.TabIndex = 5;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.ForeColor = System.Drawing.Color.White;
+            this.checkBox2.Location = new System.Drawing.Point(225, 63);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(93, 17);
+            this.checkBox2.TabIndex = 6;
+            this.checkBox2.Text = "Enable Sound";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.White;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.Location = new System.Drawing.Point(225, 530);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(150, 35);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "Back";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // tabInfo
+            // 
+            this.tabInfo.Controls.Add(this.panel4);
+            this.tabInfo.Location = new System.Drawing.Point(4, 22);
+            this.tabInfo.Name = "tabInfo";
+            this.tabInfo.Size = new System.Drawing.Size(606, 624);
+            this.tabInfo.TabIndex = 4;
+            this.tabInfo.Text = "Info";
+            this.tabInfo.UseVisualStyleBackColor = true;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.panel4.Controls.Add(this.labelInfo);
+            this.panel4.Controls.Add(this.label9);
+            this.panel4.Controls.Add(this.buttonBack3);
+            this.panel4.Location = new System.Drawing.Point(3, 2);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(600, 640);
+            this.panel4.TabIndex = 6;
+            // 
+            // labelInfo
+            // 
+            this.labelInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelInfo.ForeColor = System.Drawing.Color.White;
+            this.labelInfo.Location = new System.Drawing.Point(15, 413);
+            this.labelInfo.Name = "labelInfo";
+            this.labelInfo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelInfo.Size = new System.Drawing.Size(566, 23);
+            this.labelInfo.TabIndex = 6;
+            this.labelInfo.Text = "SimpleGame";
+            this.labelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(18, 446);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(563, 27);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "krystianjagoda@gmail.com";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // buttonBack3
+            // 
+            this.buttonBack3.BackColor = System.Drawing.Color.White;
+            this.buttonBack3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonBack3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBack3.Location = new System.Drawing.Point(225, 530);
+            this.buttonBack3.Name = "buttonBack3";
+            this.buttonBack3.Size = new System.Drawing.Size(150, 35);
+            this.buttonBack3.TabIndex = 4;
+            this.buttonBack3.Text = "Back";
+            this.buttonBack3.UseVisualStyleBackColor = false;
+            this.buttonBack3.Click += new System.EventHandler(this.buttonBack3_Click);
+            // 
+            // labelLevelFinall
+            // 
+            this.labelLevelFinall.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLevelFinall.ForeColor = System.Drawing.Color.White;
+            this.labelLevelFinall.Location = new System.Drawing.Point(20, 159);
+            this.labelLevelFinall.Name = "labelLevelFinall";
+            this.labelLevelFinall.Size = new System.Drawing.Size(561, 33);
+            this.labelLevelFinall.TabIndex = 10;
+            this.labelLevelFinall.Text = "Level:";
+            this.labelLevelFinall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(435, 5);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(30, 13);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "Fuel:";
+            // 
+            // labelFuel
+            // 
+            this.labelFuel.AutoSize = true;
+            this.labelFuel.Location = new System.Drawing.Point(471, 5);
+            this.labelFuel.Name = "labelFuel";
+            this.labelFuel.Size = new System.Drawing.Size(60, 13);
+            this.labelFuel.TabIndex = 16;
+            this.labelFuel.Text = "1000/1000";
+            // 
+            // labelPopUp
+            // 
+            this.labelPopUp.BackColor = System.Drawing.Color.Transparent;
+            this.labelPopUp.Font = new System.Drawing.Font("Monospac821 BT", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPopUp.ForeColor = System.Drawing.Color.White;
+            this.labelPopUp.Location = new System.Drawing.Point(19, 363);
+            this.labelPopUp.Name = "labelPopUp";
+            this.labelPopUp.Size = new System.Drawing.Size(562, 45);
+            this.labelPopUp.TabIndex = 4;
+            this.labelPopUp.Text = "Level 1";
+            this.labelPopUp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelPopUp.Visible = false;
+            // 
+            // timerPopUp
+            // 
+            this.timerPopUp.Interval = 1000;
+            this.timerPopUp.Tick += new System.EventHandler(this.timerPopUp_Tick);
+            // 
+            // labelPaused
+            // 
+            this.labelPaused.BackColor = System.Drawing.Color.Silver;
+            this.labelPaused.Font = new System.Drawing.Font("Monospac821 BT", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPaused.ForeColor = System.Drawing.Color.Black;
+            this.labelPaused.Location = new System.Drawing.Point(19, 274);
+            this.labelPaused.Name = "labelPaused";
+            this.labelPaused.Size = new System.Drawing.Size(562, 45);
+            this.labelPaused.TabIndex = 5;
+            this.labelPaused.Text = "Game Paused";
+            this.labelPaused.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelPaused.Visible = false;
             // 
             // SimpleGame
             // 
@@ -1075,6 +1160,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(600, 621);
             this.Controls.Add(this.tabControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "SimpleGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1086,6 +1172,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabMainMenu.ResumeLayout(false);
             this.tabMenu2.ResumeLayout(false);
@@ -1094,21 +1181,19 @@
             this.tabHowtoPlay.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            this.tabGameWindow.ResumeLayout(false);
-            this.tabGameWindow.PerformLayout();
-            this.tabScore.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.tabSettings.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.tabInfo.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.tabGameWindow.ResumeLayout(false);
+            this.tabGameWindow.PerformLayout();
+            this.tabScore.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.tabSettings.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.tabInfo.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1162,9 +1247,6 @@
         private System.Windows.Forms.Button buttonBack1;
         private System.Windows.Forms.Button buttonBack3;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ProgressBar progressBar4;
@@ -1174,7 +1256,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ProgressBar progressBar5;
         private System.Windows.Forms.Label labelAmmo;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -1197,6 +1278,17 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label labelUltimate;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label labelInfo;
+        private System.Windows.Forms.Label labelScoreFinall;
+        private System.Windows.Forms.Label labelHP;
+        private System.Windows.Forms.Label label90;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Label labelLevelFinall;
+        private System.Windows.Forms.Label labelFuel;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label labelPopUp;
+        private System.Windows.Forms.Timer timerPopUp;
+        private System.Windows.Forms.Label labelPaused;
     }
 }
 
