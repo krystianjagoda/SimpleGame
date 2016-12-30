@@ -9,41 +9,69 @@ namespace SimpleGame
 {
     class Ship
     {
-        Pen myPen = new Pen(Color.Firebrick);
-        Brush myBrush = new SolidBrush(Color.Firebrick);
-
-        Color color = Color.Firebrick;
+        Pen WhitePen = new Pen(Color.White, 2);
+        Brush RedBrush = new SolidBrush(Color.Firebrick);
+        Brush GreenBrush = new SolidBrush(Color.GreenYellow);
+        Brush PinkBrush = new SolidBrush(Color.DeepPink);
+        Brush BrushYellow = new SolidBrush(Color.Yellow);
 
         public char Type = 'A';
 
-        public int Ammo = 30;
-        public int Ultimate = 10;
-        public int HP = 100;
-        public int Fuel = 200;
+        public int Ammo;
+        public int Ultimate;
+        public int HP;
+        public int Fuel;
+        public int Damage;
 
-        public int heigh = 20;
-        public int length = 20;
+        public int heigh = 15;
+        public int length = 15;
          
         public float Xabs = 0;
         public float Yabs = 0;
+
+        public float Xb = 0;
+        public float Yb = 0;
 
         public double Angle;
 
         public float velocityX = 0;
         public float velocityY = 0;
 
-        public float speedX = 2;
-        public float speedY = 2;
+        public float speed;
 
         public double slowdown = 0.98;
 
 
         public void Reset()
         {
-            Ammo = 30;
-            Ultimate = 10;
-            HP = 100;
-            Fuel = 200;
+            if(this.Type == 'A')    // Ship A Settings
+            {
+                this.Ammo = 30;
+                this.Ultimate = 10;
+                this.HP = 100;
+                this.Fuel = 220;
+                this.speed = 2;
+                this.Damage = 15;
+            }
+            else if(this.Type == 'B')   // Ship B Settings
+            {
+                this.Ammo = 60;
+                this.Ultimate = 10;
+                this.HP = 120;
+                this.Fuel = 300;
+                this.speed = 1;
+                this.Damage = 20;
+            }
+            else if (this.Type == 'C')  // Ship C Settings
+            {
+                this.Ammo = 40;
+                this.Ultimate = 10;
+                this.HP = 60;
+                this.Fuel = 180;
+                this.speed = 3;
+                this.Damage = 17;
+            }
+
         }
 
         public void Initialize(float Xinit, float Yinit)
@@ -59,17 +87,97 @@ namespace SimpleGame
 
         public void refresh()
         {
-            Position(this.Xabs + this.velocityX * this.speedX, this.Yabs + this.velocityY * this.speedY);
+            Position(this.Xabs + this.velocityX * this.speed, this.Yabs + this.velocityY * this.speed);
             if (this.velocityX > 0) this.velocityX = this.velocityX * (float)slowdown;
             if (this.velocityX < 0) this.velocityX = this.velocityX * (float)slowdown;
             if (this.velocityY > 0) this.velocityY = this.velocityY * (float)slowdown;
             if (this.velocityY < 0) this.velocityY = this.velocityY * (float)slowdown;
         }
 
+        public void calcAngle(float Xstop, float Ystop)
+        {
+            float A = Xstop - this.Xabs;
+            float B = Ystop - this.Yabs;
+            this.Angle = (float)(Math.Atan2(A, B) / Math.PI);
+        }
 
         public void drawShip(Graphics g)
         {
-            g.FillRectangle(myBrush, Xabs-length/2, Yabs-heigh/2, length, heigh);
+
+            if(this.Type == 'A')
+            {
+                int Ax = (int)(Xabs + heigh * 2 * (float)Math.Sin(this.Angle * Math.PI));
+                int Ay = (int)(Yabs + heigh * 2 * (float)Math.Cos(this.Angle * Math.PI));
+
+                int Bx = (int)(Xabs + heigh / 2 * (float)Math.Sin(this.Angle * Math.PI));
+                int By = (int)(Yabs + heigh / 2 * (float)Math.Cos(this.Angle * Math.PI));
+
+                int Cy = (int)(Yabs + length * (float)Math.Sin(this.Angle * Math.PI));
+                int Cx = (int)(Xabs - length * (float)Math.Cos(this.Angle * Math.PI));
+
+                int Dy = (int)(Yabs - length * (float)Math.Sin(this.Angle * Math.PI));
+                int Dx = (int)(Xabs + length * (float)Math.Cos(this.Angle * Math.PI));
+
+                this.Xb = Bx;   // Bullets starting pos
+                this.Yb = By;   // Bullets starting pos
+
+                Point[] points = { new Point(Ax, Ay), new Point(Cx, Cy), new Point(Bx, By), new Point(Dx, Dy), };
+                g.FillPolygon(RedBrush, points);
+                g.DrawPolygon(WhitePen, points);
+            }
+            else if(this.Type == 'B')
+            {
+                int Ax = (int)(Xabs + heigh * (float)Math.Sin(this.Angle * Math.PI));
+                int Ay = (int)(Yabs + heigh * (float)Math.Cos(this.Angle * Math.PI));
+
+                int Bx = (int)(Xabs + heigh / 3 * (float)Math.Sin(this.Angle * Math.PI));
+                int By = (int)(Yabs + heigh / 3 * (float)Math.Cos(this.Angle * Math.PI));
+
+                int Cy = (int)(Yabs + length * 1.7 * (float)Math.Sin(this.Angle * Math.PI));
+                int Cx = (int)(Xabs - length * 1.7 * (float)Math.Cos(this.Angle * Math.PI));
+
+                int Dy = (int)(Yabs - length * 1.7 * (float)Math.Sin(this.Angle * Math.PI));
+                int Dx = (int)(Xabs + length * 1.7 * (float)Math.Cos(this.Angle * Math.PI));
+
+                this.Xb = Bx;   // Bullets starting pos
+                this.Yb = By;   // Bullets starting pos
+
+                Point[] points = { new Point(Ax, Ay), new Point(Cx, Cy), new Point(Bx, By), new Point(Dx, Dy), };
+                g.FillPolygon(GreenBrush, points);
+                g.DrawPolygon(WhitePen, points);
+            }
+
+            else if (this.Type == 'C')
+            {
+
+                int Ax = (int)(Xabs + heigh * 1.5 * (float)Math.Sin(this.Angle * Math.PI));
+                int Ay = (int)(Yabs + heigh * 1.5 * (float)Math.Cos(this.Angle * Math.PI));
+
+                int Bx = (int)(Xabs - heigh  * (float)Math.Sin(this.Angle * Math.PI));
+                int By = (int)(Yabs - heigh  * (float)Math.Cos(this.Angle * Math.PI));
+
+                int Cy = (int)(Yabs + length * 1.2 * (float)Math.Sin(this.Angle * Math.PI));
+                int Cx = (int)(Xabs - length * 1.2 * (float)Math.Cos(this.Angle * Math.PI));
+
+                int Dy = (int)(Yabs - length * 1.2 * (float)Math.Sin(this.Angle * Math.PI));
+                int Dx = (int)(Xabs + length * 1.2 * (float)Math.Cos(this.Angle * Math.PI));
+
+                int Ey = (int)(Yabs + length * 0.6 * (float)Math.Sin(this.Angle * Math.PI));
+                int Ex = (int)(Xabs - length * 0.6 * (float)Math.Cos(this.Angle * Math.PI));
+
+                int Fy = (int)(Yabs - length * 0.6 * (float)Math.Sin(this.Angle * Math.PI));
+                int Fx = (int)(Xabs + length * 0.6 * (float)Math.Cos(this.Angle * Math.PI));
+
+                this.Xb = Bx;   // Bullets starting pos
+                this.Yb = By;   // Bullets starting pos
+
+
+                Point[] points = { new Point(Ax, Ay), new Point(Ex, Ey),  new Point(Cx, Cy), new Point(Bx, By), new Point(Dx, Dy), new Point(Fx, Fy), };
+                g.FillPolygon(PinkBrush, points);
+                g.DrawPolygon(WhitePen, points);
+            }
+
+
         }
 
     }
@@ -91,7 +199,7 @@ namespace SimpleGame
             new SolidBrush(Color.LightPink),
         };
 
-        Pen myWhitePen = new Pen(Color.White);
+        Pen myWhitePen = new Pen(Color.White, 2);
 
         public int Colore = 0;
 
@@ -112,7 +220,6 @@ namespace SimpleGame
 
         public float speedX = 0.1F;
         public float speedY = 0.1F;
-
 
 
         public void shoot(float Xstart, float Ystart, float Xstop, float Ystop)

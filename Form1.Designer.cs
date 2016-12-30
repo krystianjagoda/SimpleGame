@@ -33,6 +33,8 @@
             this.labelpos = new System.Windows.Forms.Label();
             this.timerRefresh = new System.Windows.Forms.Timer(this.components);
             this.canvas = new System.Windows.Forms.Panel();
+            this.labelPaused = new System.Windows.Forms.Label();
+            this.labelPopUp = new System.Windows.Forms.Label();
             this.debugBox = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -53,6 +55,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.timerGameTick = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelFuel = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.labelHP = new System.Windows.Forms.Label();
             this.label90 = new System.Windows.Forms.Label();
             this.labelUltimate = new System.Windows.Forms.Label();
@@ -71,16 +75,16 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabMainMenu = new System.Windows.Forms.TabPage();
             this.tabMenu2 = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.canvasShip = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.progressBar4 = new System.Windows.Forms.ProgressBar();
-            this.progressBar3 = new System.Windows.Forms.ProgressBar();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
+            this.barFuel = new System.Windows.Forms.ProgressBar();
+            this.barAmmo = new System.Windows.Forms.ProgressBar();
+            this.barDamage = new System.Windows.Forms.ProgressBar();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.barSpeed = new System.Windows.Forms.ProgressBar();
             this.buttonBack1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -102,6 +106,7 @@
             this.tabGameWindow = new System.Windows.Forms.TabPage();
             this.tabScore = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.labelLevelFinall = new System.Windows.Forms.Label();
             this.labelScoreFinall = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -114,12 +119,9 @@
             this.labelInfo = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.buttonBack3 = new System.Windows.Forms.Button();
-            this.labelLevelFinall = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.labelFuel = new System.Windows.Forms.Label();
-            this.labelPopUp = new System.Windows.Forms.Label();
             this.timerPopUp = new System.Windows.Forms.Timer(this.components);
-            this.labelPaused = new System.Windows.Forms.Label();
+            this.barHP = new System.Windows.Forms.ProgressBar();
+            this.label11 = new System.Windows.Forms.Label();
             this.canvas.SuspendLayout();
             this.debugBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -129,7 +131,7 @@
             this.tabControl.SuspendLayout();
             this.tabMainMenu.SuspendLayout();
             this.tabMenu2.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.canvasShip.SuspendLayout();
             this.tabHowtoPlay.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -178,6 +180,32 @@
             this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
+            // 
+            // labelPaused
+            // 
+            this.labelPaused.BackColor = System.Drawing.Color.Silver;
+            this.labelPaused.Font = new System.Drawing.Font("Monospac821 BT", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPaused.ForeColor = System.Drawing.Color.Black;
+            this.labelPaused.Location = new System.Drawing.Point(19, 274);
+            this.labelPaused.Name = "labelPaused";
+            this.labelPaused.Size = new System.Drawing.Size(562, 45);
+            this.labelPaused.TabIndex = 5;
+            this.labelPaused.Text = "Game Paused";
+            this.labelPaused.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelPaused.Visible = false;
+            // 
+            // labelPopUp
+            // 
+            this.labelPopUp.BackColor = System.Drawing.Color.Transparent;
+            this.labelPopUp.Font = new System.Drawing.Font("Monospac821 BT", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPopUp.ForeColor = System.Drawing.Color.White;
+            this.labelPopUp.Location = new System.Drawing.Point(146, 3);
+            this.labelPopUp.Name = "labelPopUp";
+            this.labelPopUp.Size = new System.Drawing.Size(286, 45);
+            this.labelPopUp.TabIndex = 4;
+            this.labelPopUp.Text = "Level 1";
+            this.labelPopUp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelPopUp.Visible = false;
             // 
             // debugBox
             // 
@@ -407,14 +435,32 @@
             this.panel1.Size = new System.Drawing.Size(600, 20);
             this.panel1.TabIndex = 4;
             // 
+            // labelFuel
+            // 
+            this.labelFuel.AutoSize = true;
+            this.labelFuel.Location = new System.Drawing.Point(471, 5);
+            this.labelFuel.Name = "labelFuel";
+            this.labelFuel.Size = new System.Drawing.Size(31, 13);
+            this.labelFuel.TabIndex = 16;
+            this.labelFuel.Text = "1000";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(435, 5);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(30, 13);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "Fuel:";
+            // 
             // labelHP
             // 
             this.labelHP.AutoSize = true;
             this.labelHP.Location = new System.Drawing.Point(376, 5);
             this.labelHP.Name = "labelHP";
-            this.labelHP.Size = new System.Drawing.Size(48, 13);
+            this.labelHP.Size = new System.Drawing.Size(25, 13);
             this.labelHP.TabIndex = 14;
-            this.labelHP.Text = "100/100";
+            this.labelHP.Text = "100";
             // 
             // label90
             // 
@@ -592,7 +638,7 @@
             // 
             // tabMenu2
             // 
-            this.tabMenu2.Controls.Add(this.panel2);
+            this.tabMenu2.Controls.Add(this.canvasShip);
             this.tabMenu2.Location = new System.Drawing.Point(4, 22);
             this.tabMenu2.Name = "tabMenu2";
             this.tabMenu2.Padding = new System.Windows.Forms.Padding(3);
@@ -601,26 +647,29 @@
             this.tabMenu2.Text = "Menu2";
             this.tabMenu2.UseVisualStyleBackColor = true;
             // 
-            // panel2
+            // canvasShip
             // 
-            this.panel2.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.panel2.Controls.Add(this.label14);
-            this.panel2.Controls.Add(this.label18);
-            this.panel2.Controls.Add(this.label17);
-            this.panel2.Controls.Add(this.progressBar4);
-            this.panel2.Controls.Add(this.progressBar3);
-            this.panel2.Controls.Add(this.progressBar2);
-            this.panel2.Controls.Add(this.label16);
-            this.panel2.Controls.Add(this.label15);
-            this.panel2.Controls.Add(this.progressBar1);
-            this.panel2.Controls.Add(this.buttonBack1);
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.buttonNext);
-            this.panel2.Location = new System.Drawing.Point(3, 2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(600, 640);
-            this.panel2.TabIndex = 5;
+            this.canvasShip.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.canvasShip.Controls.Add(this.label11);
+            this.canvasShip.Controls.Add(this.barHP);
+            this.canvasShip.Controls.Add(this.label14);
+            this.canvasShip.Controls.Add(this.label18);
+            this.canvasShip.Controls.Add(this.label17);
+            this.canvasShip.Controls.Add(this.barFuel);
+            this.canvasShip.Controls.Add(this.barAmmo);
+            this.canvasShip.Controls.Add(this.barDamage);
+            this.canvasShip.Controls.Add(this.label16);
+            this.canvasShip.Controls.Add(this.label15);
+            this.canvasShip.Controls.Add(this.barSpeed);
+            this.canvasShip.Controls.Add(this.buttonBack1);
+            this.canvasShip.Controls.Add(this.button4);
+            this.canvasShip.Controls.Add(this.button3);
+            this.canvasShip.Controls.Add(this.buttonNext);
+            this.canvasShip.Location = new System.Drawing.Point(3, 2);
+            this.canvasShip.Name = "canvasShip";
+            this.canvasShip.Size = new System.Drawing.Size(600, 640);
+            this.canvasShip.TabIndex = 5;
+            this.canvasShip.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasShip_Paint);
             // 
             // label14
             // 
@@ -656,29 +705,34 @@
             this.label17.TabIndex = 14;
             this.label17.Text = "Ammo:";
             // 
-            // progressBar4
+            // barFuel
             // 
-            this.progressBar4.Location = new System.Drawing.Point(274, 289);
-            this.progressBar4.Name = "progressBar4";
-            this.progressBar4.Size = new System.Drawing.Size(100, 16);
-            this.progressBar4.TabIndex = 13;
-            this.progressBar4.Value = 80;
+            this.barFuel.Location = new System.Drawing.Point(274, 289);
+            this.barFuel.Maximum = 400;
+            this.barFuel.Name = "barFuel";
+            this.barFuel.Size = new System.Drawing.Size(100, 16);
+            this.barFuel.Step = 1;
+            this.barFuel.TabIndex = 13;
+            this.barFuel.Value = 100;
             // 
-            // progressBar3
+            // barAmmo
             // 
-            this.progressBar3.Location = new System.Drawing.Point(274, 267);
-            this.progressBar3.Name = "progressBar3";
-            this.progressBar3.Size = new System.Drawing.Size(100, 16);
-            this.progressBar3.TabIndex = 12;
-            this.progressBar3.Value = 50;
+            this.barAmmo.Location = new System.Drawing.Point(274, 267);
+            this.barAmmo.Name = "barAmmo";
+            this.barAmmo.Size = new System.Drawing.Size(100, 16);
+            this.barAmmo.Step = 1;
+            this.barAmmo.TabIndex = 12;
+            this.barAmmo.Value = 50;
             // 
-            // progressBar2
+            // barDamage
             // 
-            this.progressBar2.Location = new System.Drawing.Point(274, 245);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(100, 16);
-            this.progressBar2.TabIndex = 11;
-            this.progressBar2.Value = 30;
+            this.barDamage.Location = new System.Drawing.Point(274, 245);
+            this.barDamage.Maximum = 25;
+            this.barDamage.Name = "barDamage";
+            this.barDamage.Size = new System.Drawing.Size(100, 16);
+            this.barDamage.Step = 1;
+            this.barDamage.TabIndex = 11;
+            this.barDamage.Value = 12;
             // 
             // label16
             // 
@@ -702,13 +756,15 @@
             this.label15.TabIndex = 9;
             this.label15.Text = "Speed:";
             // 
-            // progressBar1
+            // barSpeed
             // 
-            this.progressBar1.Location = new System.Drawing.Point(274, 223);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(100, 16);
-            this.progressBar1.TabIndex = 8;
-            this.progressBar1.Value = 70;
+            this.barSpeed.Location = new System.Drawing.Point(274, 223);
+            this.barSpeed.Maximum = 4;
+            this.barSpeed.Name = "barSpeed";
+            this.barSpeed.Size = new System.Drawing.Size(100, 16);
+            this.barSpeed.Step = 1;
+            this.barSpeed.TabIndex = 8;
+            this.barSpeed.Value = 3;
             // 
             // buttonBack1
             // 
@@ -735,6 +791,7 @@
             this.button4.TabIndex = 3;
             this.button4.Text = "<";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -748,6 +805,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = ">";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // buttonNext
             // 
@@ -956,6 +1014,17 @@
             this.panel5.Size = new System.Drawing.Size(600, 640);
             this.panel5.TabIndex = 7;
             // 
+            // labelLevelFinall
+            // 
+            this.labelLevelFinall.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLevelFinall.ForeColor = System.Drawing.Color.White;
+            this.labelLevelFinall.Location = new System.Drawing.Point(20, 159);
+            this.labelLevelFinall.Name = "labelLevelFinall";
+            this.labelLevelFinall.Size = new System.Drawing.Size(561, 33);
+            this.labelLevelFinall.TabIndex = 10;
+            this.labelLevelFinall.Text = "Level:";
+            this.labelLevelFinall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // labelScoreFinall
             // 
             this.labelScoreFinall.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1094,65 +1163,31 @@
             this.buttonBack3.UseVisualStyleBackColor = false;
             this.buttonBack3.Click += new System.EventHandler(this.buttonBack3_Click);
             // 
-            // labelLevelFinall
-            // 
-            this.labelLevelFinall.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLevelFinall.ForeColor = System.Drawing.Color.White;
-            this.labelLevelFinall.Location = new System.Drawing.Point(20, 159);
-            this.labelLevelFinall.Name = "labelLevelFinall";
-            this.labelLevelFinall.Size = new System.Drawing.Size(561, 33);
-            this.labelLevelFinall.TabIndex = 10;
-            this.labelLevelFinall.Text = "Level:";
-            this.labelLevelFinall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(435, 5);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(30, 13);
-            this.label10.TabIndex = 15;
-            this.label10.Text = "Fuel:";
-            // 
-            // labelFuel
-            // 
-            this.labelFuel.AutoSize = true;
-            this.labelFuel.Location = new System.Drawing.Point(471, 5);
-            this.labelFuel.Name = "labelFuel";
-            this.labelFuel.Size = new System.Drawing.Size(60, 13);
-            this.labelFuel.TabIndex = 16;
-            this.labelFuel.Text = "1000/1000";
-            // 
-            // labelPopUp
-            // 
-            this.labelPopUp.BackColor = System.Drawing.Color.Transparent;
-            this.labelPopUp.Font = new System.Drawing.Font("Monospac821 BT", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPopUp.ForeColor = System.Drawing.Color.White;
-            this.labelPopUp.Location = new System.Drawing.Point(19, 363);
-            this.labelPopUp.Name = "labelPopUp";
-            this.labelPopUp.Size = new System.Drawing.Size(562, 45);
-            this.labelPopUp.TabIndex = 4;
-            this.labelPopUp.Text = "Level 1";
-            this.labelPopUp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelPopUp.Visible = false;
-            // 
             // timerPopUp
             // 
             this.timerPopUp.Interval = 1000;
             this.timerPopUp.Tick += new System.EventHandler(this.timerPopUp_Tick);
             // 
-            // labelPaused
+            // barHP
             // 
-            this.labelPaused.BackColor = System.Drawing.Color.Silver;
-            this.labelPaused.Font = new System.Drawing.Font("Monospac821 BT", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPaused.ForeColor = System.Drawing.Color.Black;
-            this.labelPaused.Location = new System.Drawing.Point(19, 274);
-            this.labelPaused.Name = "labelPaused";
-            this.labelPaused.Size = new System.Drawing.Size(562, 45);
-            this.labelPaused.TabIndex = 5;
-            this.labelPaused.Text = "Game Paused";
-            this.labelPaused.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelPaused.Visible = false;
+            this.barHP.Location = new System.Drawing.Point(274, 311);
+            this.barHP.Maximum = 150;
+            this.barHP.Name = "barHP";
+            this.barHP.Size = new System.Drawing.Size(100, 16);
+            this.barHP.Step = 1;
+            this.barHP.TabIndex = 18;
+            this.barHP.Value = 70;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(235, 311);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(33, 16);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "HP:";
             // 
             // SimpleGame
             // 
@@ -1176,8 +1211,8 @@
             this.tabControl.ResumeLayout(false);
             this.tabMainMenu.ResumeLayout(false);
             this.tabMenu2.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.canvasShip.ResumeLayout(false);
+            this.canvasShip.PerformLayout();
             this.tabHowtoPlay.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -1234,7 +1269,7 @@
         private System.Windows.Forms.TabPage tabGameWindow;
         private System.Windows.Forms.TabPage tabMainMenu;
         private System.Windows.Forms.TabPage tabMenu2;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel canvasShip;
         private System.Windows.Forms.TabPage tabSettings;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button4;
@@ -1249,12 +1284,12 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ProgressBar progressBar4;
-        private System.Windows.Forms.ProgressBar progressBar3;
-        private System.Windows.Forms.ProgressBar progressBar2;
+        private System.Windows.Forms.ProgressBar barFuel;
+        private System.Windows.Forms.ProgressBar barAmmo;
+        private System.Windows.Forms.ProgressBar barDamage;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar barSpeed;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label labelAmmo;
         private System.Windows.Forms.Label label50;
@@ -1289,6 +1324,8 @@
         private System.Windows.Forms.Label labelPopUp;
         private System.Windows.Forms.Timer timerPopUp;
         private System.Windows.Forms.Label labelPaused;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ProgressBar barHP;
     }
 }
 

@@ -239,16 +239,22 @@ namespace SimpleGame
 
 
 
+        private void canvasShip_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics gs = canvasShip.CreateGraphics();
+            ship.Angle  = 1;
+            ship.Xabs = 300;
+            ship.Yabs = 130;
+            ship.drawShip(gs);
+        }
+
 
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = canvas.CreateGraphics();
 
-            Pen whitePen = new Pen(whiteBrush, 1);
-            g.DrawLine(whitePen, ship.Xabs, ship.Yabs, MouseX, MouseY);
-
-            
-            
+       //     Pen whitePen = new Pen(whiteBrush, 1);
+       //     g.DrawLine(whitePen, ship.Xb, ship.Yb, MouseX, MouseY);
 
             foreach (Asteroid a in asteroids)
             {
@@ -292,8 +298,8 @@ namespace SimpleGame
             labelLevel.Text = gameWindow.GameLevel.ToString();
             labelAmmo.Text = ship.Ammo.ToString();
             labelUltimate.Text = ship.Ultimate.ToString();
-            labelHP.Text = ship.HP.ToString() + " / 100";
-            labelFuel.Text = ship.Fuel.ToString() + " / 200";
+            labelHP.Text = ship.HP.ToString();
+            labelFuel.Text = ship.Fuel.ToString();
 
 
             canvas.Refresh();
@@ -307,6 +313,8 @@ namespace SimpleGame
         {
             MouseX = e.Location.X;
             MouseY = e.Location.Y;
+
+            ship.calcAngle(MouseX, MouseY);
         }
 
         private void canvas_Click(object sender, EventArgs e)
@@ -393,7 +401,7 @@ namespace SimpleGame
                     {
                         if (((a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y)) - ((a.size/2)*(a.size/2)) < 10)
                         {
-                            a.HP = a.HP - 15;
+                            a.HP = a.HP - ship.Damage;
                             tempB = b;
                             BullettoRemove = true;
                             if (a.HP <= 15)
@@ -443,7 +451,7 @@ namespace SimpleGame
 
                         gameWindow.NumberOfBullets = bullets.Count();
 
-                        bullets[gameWindow.NumberOfBullets - 1].shoot(ship.Xabs, ship.Yabs, MouseX, MouseY);
+                        bullets[gameWindow.NumberOfBullets - 1].shoot(ship.Xb, ship.Yb, MouseX, MouseY);
                         soundShoot.Play();
                     }
 
@@ -533,6 +541,7 @@ namespace SimpleGame
         private void buttonStartGame_Click(object sender, EventArgs e)
         {
             ResetGame();
+            refreshShipScreen();
             tabControl.SelectedIndex = 1; // Go to ShipSelection
             soundHit.Play();
         }
@@ -606,6 +615,33 @@ namespace SimpleGame
             labelPopUp.Visible = false;
             timerPopUp.Enabled = false;
             gameWindow.GameStop = false;
+        }
+
+        public void refreshShipScreen()
+        {
+            canvasShip.Refresh();
+            ship.Reset();
+            barAmmo.Value = ship.Ammo;
+            barHP.Value = ship.HP;
+            barFuel.Value = ship.Fuel;
+            barSpeed.Value = (int)ship.speed;
+            barDamage.Value = ship.Damage;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (ship.Type == 'A') ship.Type = 'B';
+            else if (ship.Type == 'B') ship.Type = 'C';
+            else if (ship.Type == 'C') ship.Type = 'A';
+            refreshShipScreen();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (ship.Type == 'C') ship.Type = 'B';
+            else if (ship.Type == 'B') ship.Type = 'A';
+            else if (ship.Type == 'A') ship.Type = 'C';
+            refreshShipScreen();
         }
     }
 }
