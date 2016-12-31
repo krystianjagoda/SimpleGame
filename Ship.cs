@@ -14,6 +14,7 @@ namespace SimpleGame
         Brush GreenBrush = new SolidBrush(Color.GreenYellow);
         Brush PinkBrush = new SolidBrush(Color.DeepPink);
         Brush BrushYellow = new SolidBrush(Color.Yellow);
+        Brush BrushOrange = new SolidBrush(Color.Orange);
 
         public char Type = 'A';
 
@@ -123,7 +124,7 @@ namespace SimpleGame
 
                 Point[] points = { new Point(Ax, Ay), new Point(Cx, Cy), new Point(Bx, By), new Point(Dx, Dy), };
                 g.FillPolygon(RedBrush, points);
-                g.DrawPolygon(WhitePen, points);
+                g.DrawPolygon(Pens.White, points);
             }
             else if(this.Type == 'B')
             {
@@ -144,7 +145,7 @@ namespace SimpleGame
 
                 Point[] points = { new Point(Ax, Ay), new Point(Cx, Cy), new Point(Bx, By), new Point(Dx, Dy), };
                 g.FillPolygon(GreenBrush, points);
-                g.DrawPolygon(WhitePen, points);
+                g.DrawPolygon(Pens.White, points);
             }
 
             else if (this.Type == 'C')
@@ -173,8 +174,8 @@ namespace SimpleGame
 
 
                 Point[] points = { new Point(Ax, Ay), new Point(Ex, Ey),  new Point(Cx, Cy), new Point(Bx, By), new Point(Dx, Dy), new Point(Fx, Fy), };
-                g.FillPolygon(PinkBrush, points);
-                g.DrawPolygon(WhitePen, points);
+                g.FillPolygon(Brushes.Orange, points);
+                g.DrawPolygon(Pens.White, points);
             }
 
 

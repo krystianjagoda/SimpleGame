@@ -10,6 +10,9 @@ namespace SimpleGame
     class GameWindow
     {
 
+        public bool SoundEnabled = true;
+        public bool DebugModeEnabled = false;
+
         public int Score = 0;
         public int GameLevel = 1;
 

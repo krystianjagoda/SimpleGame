@@ -9,8 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 
+
 namespace SimpleGame
 {
+
+
+
     public partial class SimpleGame : Form
     {
 
@@ -63,10 +67,15 @@ namespace SimpleGame
             InitializeComponent();
 
             tabControl.Location = new Point(-7, -24);
-            canvas.Size = new Size(600, 600);
+            canvasBox.Size = new Size(600, 600);
             gameWindow.SetSize(600, 600);
             timerGameTick.Enabled = false;
             timerRefresh.Enabled = true;
+
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            UpdateStyles();
+
         }
 
 
@@ -101,11 +110,11 @@ namespace SimpleGame
                     bullets[gameWindow.NumberOfBullets - 8].shoot(ship.Xabs, ship.Yabs, ship.Xabs - 20, ship.Yabs + 20);
 
 
-                soundUlti.Play();
+                if (gameWindow.SoundEnabled) soundUlti.Play();
                 }
                 else
                 {
-                    soundEmpty.Play();
+                if (gameWindow.SoundEnabled) soundEmpty.Play();
                 }
         }
 
@@ -241,39 +250,52 @@ namespace SimpleGame
 
         private void canvasShip_Paint(object sender, PaintEventArgs e)
         {
-            Graphics gs = canvasShip.CreateGraphics();
+
             ship.Angle  = 1;
             ship.Xabs = 300;
             ship.Yabs = 130;
-            ship.drawShip(gs);
+            ship.drawShip(e.Graphics);
+            Invalidate();
         }
 
 
-        private void canvas_Paint(object sender, PaintEventArgs e)
+        private void canvasBox_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = canvas.CreateGraphics();
-
-       //     Pen whitePen = new Pen(whiteBrush, 1);
-       //     g.DrawLine(whitePen, ship.Xb, ship.Yb, MouseX, MouseY);
-
             foreach (Asteroid a in asteroids)
             {
-                a.draw(g);
+                a.draw(e.Graphics);
             }
 
             foreach (Bullet b in bullets)
             {
-                b.drawBullet(g);
+                b.drawBullet(e.Graphics);
             }
 
 
-            bonuses[0].draw(g);
-            bonuses[1].draw(g);
-            bonuses[2].draw(g);
+            bonuses[0].draw(e.Graphics);
+            bonuses[1].draw(e.Graphics);
+            bonuses[2].draw(e.Graphics);
 
-            ship.drawShip(g);
-
+            ship.drawShip(e.Graphics);
         }
+
+
+                                                                                            private void canvas_Paint(object sender, PaintEventArgs e)
+                                                                                            {
+
+                                                                                            }
+
+
+        public partial class BufferPanel : Panel
+        {
+            public BufferPanel()
+            {
+                SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+                SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+                UpdateStyles();
+            }
+        }
+
 
         public void RefreshView()
         {
@@ -286,7 +308,7 @@ namespace SimpleGame
                 labelAsteroids.Text = gameWindow.NumberOfAsteroids.ToString();
                 labelPositionAbs.Text = (ship.Xabs).ToString("F") + "," + ship.Yabs.ToString("F");
                 labelSpeed.Text = (ship.velocityX).ToString("F") + "," + (ship.velocityY).ToString("F");
-                labelSize.Text = (canvas.Size.Height).ToString() + "," + (canvas.Size.Width).ToString();
+                labelSize.Text = (canvasBox.Size.Height).ToString() + "," + (canvasBox.Size.Width).ToString();
                 labelAngle.Text = ship.Angle.ToString("F");
             }
             else
@@ -301,15 +323,14 @@ namespace SimpleGame
             labelHP.Text = ship.HP.ToString();
             labelFuel.Text = ship.Fuel.ToString();
 
-
-            canvas.Refresh();
+            canvasBox.Invalidate();
         }
 
-        private void canvas_MouseClick(object sender, MouseEventArgs e)
-        {
-        }
+                                                                                                private void canvas_MouseClick(object sender, MouseEventArgs e)
+                                                                                                {
+                                                                                                }
 
-        private void canvas_MouseMove(object sender, MouseEventArgs e)
+        private void canvasBox_MouseMove(object sender, MouseEventArgs e)
         {
             MouseX = e.Location.X;
             MouseY = e.Location.Y;
@@ -317,10 +338,14 @@ namespace SimpleGame
             ship.calcAngle(MouseX, MouseY);
         }
 
-        private void canvas_Click(object sender, EventArgs e)
-        {
 
-        }
+                                                                                                private void canvas_MouseMove(object sender, MouseEventArgs e)
+                                                                                                {
+                                                                                                }
+
+                                                                                                private void canvas_Click(object sender, EventArgs e)
+                                                                                                {
+                                                                                                }
 
         private void timerGameTick_Tick(object sender, EventArgs e)
         {
@@ -391,7 +416,7 @@ namespace SimpleGame
                             labelScoreFinall.Text = "Score: " + gameWindow.Score.ToString();
                             labelLevelFinall.Text = "Level: " + gameWindow.GameLevel.ToString();
                             tabControl.SelectedIndex = 4;   // Go to Score;
-                            soundHit.Play();
+                            if (gameWindow.SoundEnabled) soundHit.Play();
                             break;
                         }
 
@@ -428,14 +453,21 @@ namespace SimpleGame
             }
         }
 
-        private void canvas_MouseDown(object sender, MouseEventArgs e)
+                                                                                                            private void canvas_MouseDown(object sender, MouseEventArgs e)
+                                                                                                            {
+
+                                                                                                            }
+
+
+
+
+                                                                                                            private void canvas_MouseUp(object sender, MouseEventArgs e)
+                                                                                                            {
+                                                                                                            }
+
+
+        private void canvasBox_MouseUp(object sender, MouseEventArgs e)
         {
-
-        }
-
-        private void canvas_MouseUp(object sender, MouseEventArgs e)
-        {
-
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 if (gameWindow.GameStop == false)
@@ -452,12 +484,12 @@ namespace SimpleGame
                         gameWindow.NumberOfBullets = bullets.Count();
 
                         bullets[gameWindow.NumberOfBullets - 1].shoot(ship.Xb, ship.Yb, MouseX, MouseY);
-                        soundShoot.Play();
+                        if (gameWindow.SoundEnabled) soundShoot.Play();
                     }
 
                     else
                     {
-                        soundEmpty.Play();
+                        if (gameWindow.SoundEnabled) soundEmpty.Play();
                     }
                 }
             }
@@ -482,9 +514,7 @@ namespace SimpleGame
                     if (ship.Fuel < 0) ship.Fuel = 0;
                 }
             }
-
-         }
-        
+        }
 
         private void buttonStopGame_Click(object sender, EventArgs e)
         {
@@ -540,74 +570,76 @@ namespace SimpleGame
 
         private void buttonStartGame_Click(object sender, EventArgs e)
         {
+            if (gameWindow.SoundEnabled) soundHit.Play();
             ResetGame();
             refreshShipScreen();
             tabControl.SelectedIndex = 1; // Go to ShipSelection
-            soundHit.Play();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (gameWindow.SoundEnabled) soundHit.Play();
             tabControl.SelectedIndex = 3;
-            soundHit.Play();
             ResetGame();
             StartNewLevel(1);
         }
 
         private void buttonBack3_Click(object sender, EventArgs e)
         {
+            if (gameWindow.SoundEnabled) soundHit.Play();
             tabControl.SelectedIndex = 0;  // Move back to MainMenu
-            soundHit.Play();
         }
 
         private void buttonBack1_Click(object sender, EventArgs e)
         {
+            if (gameWindow.SoundEnabled) soundHit.Play();
             tabControl.SelectedIndex = 0;   // Move back to MainMenu
-            soundHit.Play();
         }
 
         private void buttonInfo_Click(object sender, EventArgs e)
         {
+            if (gameWindow.SoundEnabled) soundHit.Play();
             tabControl.SelectedIndex = 6;   // Go to Info
-            soundHit.Play();
             labelInfo.Text = Info;
         }
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
+            if (gameWindow.SoundEnabled) soundHit.Play();
             tabControl.SelectedIndex = 5;   // Go to Settings
-            soundHit.Play();
         }
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
+            if (gameWindow.SoundEnabled) soundHit.Play();
             tabControl.SelectedIndex = 2;   // Go to How to Play
-            soundHit.Play();
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            if (gameWindow.SoundEnabled) soundHit.Play();
             tabControl.SelectedIndex = 3;   // Start New Game
-            soundHit.Play();
             StartNewLevel(1);
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            if (gameWindow.SoundEnabled) soundHit.Play();
             tabControl.SelectedIndex = 1;   // Move back to ShipSelection
-            soundHit.Play();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            if (gameWindow.SoundEnabled) soundHit.Play();
             tabControl.SelectedIndex = 0;   // Move back to MainMenu
-            soundHit.Play();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            tabControl.SelectedIndex = 0;   // Move back to MainMenu
-            soundHit.Play();
+            if (gameWindow.SoundEnabled) soundHit.Play();
+            if (gameWindow.DebugModeEnabled == true) checkBox1.Visible = true;
+            else if (gameWindow.DebugModeEnabled == false) checkBox1.Visible = false;
+            tabControl.SelectedIndex = 0;   // Move back to MainMenu       
         }
 
         private void timerPopUp_Tick(object sender, EventArgs e)
@@ -630,6 +662,7 @@ namespace SimpleGame
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (gameWindow.SoundEnabled) soundHit.Play();
             if (ship.Type == 'A') ship.Type = 'B';
             else if (ship.Type == 'B') ship.Type = 'C';
             else if (ship.Type == 'C') ship.Type = 'A';
@@ -638,10 +671,25 @@ namespace SimpleGame
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (gameWindow.SoundEnabled) soundHit.Play();
             if (ship.Type == 'C') ship.Type = 'B';
             else if (ship.Type == 'B') ship.Type = 'A';
             else if (ship.Type == 'A') ship.Type = 'C';
             refreshShipScreen();
         }
+
+        private void checkBoxSound_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxSound.Checked == true) gameWindow.SoundEnabled = true;
+            else if(checkBoxSound.Checked == false) gameWindow.SoundEnabled = false;
+        }
+
+        private void checkBoxDebuging_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxDebuging.Checked == true) gameWindow.DebugModeEnabled = true;
+            else if (checkBoxDebuging.Checked == false) gameWindow.DebugModeEnabled = false;
+        }
+
+
     }
 }

@@ -30,27 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SimpleGame));
-            this.labelpos = new System.Windows.Forms.Label();
             this.timerRefresh = new System.Windows.Forms.Timer(this.components);
-            this.canvas = new System.Windows.Forms.Panel();
-            this.labelPaused = new System.Windows.Forms.Label();
-            this.labelPopUp = new System.Windows.Forms.Label();
-            this.debugBox = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.labelAsteroids = new System.Windows.Forms.Label();
-            this.labelAngle = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.buttonStopGame = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.labelSpeed = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.labelPositionAbs = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.labelSize = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelBullets = new System.Windows.Forms.Label();
             this.labelScore = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.timerGameTick = new System.Windows.Forms.Timer(this.components);
@@ -63,7 +43,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.labelAmmo = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.labelLevel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panelMenu = new System.Windows.Forms.Panel();
@@ -76,6 +55,8 @@
             this.tabMainMenu = new System.Windows.Forms.TabPage();
             this.tabMenu2 = new System.Windows.Forms.TabPage();
             this.canvasShip = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.barHP = new System.Windows.Forms.ProgressBar();
             this.label14 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -112,7 +93,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.tabSettings = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBoxDebuging = new System.Windows.Forms.CheckBox();
+            this.checkBoxSound = new System.Windows.Forms.CheckBox();
             this.button6 = new System.Windows.Forms.Button();
             this.tabInfo = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -120,11 +102,29 @@
             this.label9 = new System.Windows.Forms.Label();
             this.buttonBack3 = new System.Windows.Forms.Button();
             this.timerPopUp = new System.Windows.Forms.Timer(this.components);
-            this.barHP = new System.Windows.Forms.ProgressBar();
-            this.label11 = new System.Windows.Forms.Label();
-            this.canvas.SuspendLayout();
-            this.debugBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.canvasBox = new System.Windows.Forms.PictureBox();
+            this.buttonFinish = new System.Windows.Forms.Button();
+            this.labelPaused = new System.Windows.Forms.Label();
+            this.labelPopUp = new System.Windows.Forms.Label();
+            this.debugBox = new System.Windows.Forms.GroupBox();
+            this.labelBullets = new System.Windows.Forms.Label();
+            this.labelpos = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelSize = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.labelPositionAbs = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.labelSpeed = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonStopGame = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.labelAngle = new System.Windows.Forms.Label();
+            this.labelAsteroids = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -145,257 +145,20 @@
             this.panel3.SuspendLayout();
             this.tabInfo.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.canvasBox)).BeginInit();
+            this.debugBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // labelpos
-            // 
-            this.labelpos.AutoSize = true;
-            this.labelpos.Location = new System.Drawing.Point(49, 16);
-            this.labelpos.Name = "labelpos";
-            this.labelpos.Size = new System.Drawing.Size(41, 13);
-            this.labelpos.TabIndex = 1;
-            this.labelpos.Text = "Bullets:";
             // 
             // timerRefresh
             // 
             this.timerRefresh.Interval = 20;
             this.timerRefresh.Tick += new System.EventHandler(this.timerRefresh_Tick);
             // 
-            // canvas
-            // 
-            this.canvas.AutoSize = true;
-            this.canvas.BackColor = System.Drawing.Color.SteelBlue;
-            this.canvas.Controls.Add(this.labelPaused);
-            this.canvas.Controls.Add(this.labelPopUp);
-            this.canvas.Controls.Add(this.debugBox);
-            this.canvas.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.canvas.Location = new System.Drawing.Point(3, 23);
-            this.canvas.Margin = new System.Windows.Forms.Padding(0);
-            this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(685, 676);
-            this.canvas.TabIndex = 3;
-            this.canvas.Click += new System.EventHandler(this.canvas_Click);
-            this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
-            this.canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseClick);
-            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
-            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
-            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
-            // 
-            // labelPaused
-            // 
-            this.labelPaused.BackColor = System.Drawing.Color.Silver;
-            this.labelPaused.Font = new System.Drawing.Font("Monospac821 BT", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPaused.ForeColor = System.Drawing.Color.Black;
-            this.labelPaused.Location = new System.Drawing.Point(19, 274);
-            this.labelPaused.Name = "labelPaused";
-            this.labelPaused.Size = new System.Drawing.Size(562, 45);
-            this.labelPaused.TabIndex = 5;
-            this.labelPaused.Text = "Game Paused";
-            this.labelPaused.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelPaused.Visible = false;
-            // 
-            // labelPopUp
-            // 
-            this.labelPopUp.BackColor = System.Drawing.Color.Transparent;
-            this.labelPopUp.Font = new System.Drawing.Font("Monospac821 BT", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPopUp.ForeColor = System.Drawing.Color.White;
-            this.labelPopUp.Location = new System.Drawing.Point(146, 3);
-            this.labelPopUp.Name = "labelPopUp";
-            this.labelPopUp.Size = new System.Drawing.Size(286, 45);
-            this.labelPopUp.TabIndex = 4;
-            this.labelPopUp.Text = "Level 1";
-            this.labelPopUp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelPopUp.Visible = false;
-            // 
-            // debugBox
-            // 
-            this.debugBox.BackColor = System.Drawing.Color.Transparent;
-            this.debugBox.Controls.Add(this.button1);
-            this.debugBox.Controls.Add(this.label6);
-            this.debugBox.Controls.Add(this.labelAsteroids);
-            this.debugBox.Controls.Add(this.labelAngle);
-            this.debugBox.Controls.Add(this.label5);
-            this.debugBox.Controls.Add(this.buttonStopGame);
-            this.debugBox.Controls.Add(this.label3);
-            this.debugBox.Controls.Add(this.numericUpDown1);
-            this.debugBox.Controls.Add(this.labelSpeed);
-            this.debugBox.Controls.Add(this.label4);
-            this.debugBox.Controls.Add(this.labelPositionAbs);
-            this.debugBox.Controls.Add(this.label2);
-            this.debugBox.Controls.Add(this.labelSize);
-            this.debugBox.Controls.Add(this.label1);
-            this.debugBox.Controls.Add(this.labelpos);
-            this.debugBox.Controls.Add(this.labelBullets);
-            this.debugBox.Location = new System.Drawing.Point(438, 3);
-            this.debugBox.Name = "debugBox";
-            this.debugBox.Size = new System.Drawing.Size(150, 200);
-            this.debugBox.TabIndex = 3;
-            this.debugBox.TabStop = false;
-            this.debugBox.Visible = false;
-            this.debugBox.Enter += new System.EventHandler(this.debugBox_Enter);
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(6, 171);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 24);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "StartNew";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(37, 29);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Asteroids:";
-            // 
-            // labelAsteroids
-            // 
-            this.labelAsteroids.AutoSize = true;
-            this.labelAsteroids.Location = new System.Drawing.Point(101, 29);
-            this.labelAsteroids.Name = "labelAsteroids";
-            this.labelAsteroids.Size = new System.Drawing.Size(14, 13);
-            this.labelAsteroids.TabIndex = 15;
-            this.labelAsteroids.Text = "X";
-            // 
-            // labelAngle
-            // 
-            this.labelAngle.AutoSize = true;
-            this.labelAngle.Location = new System.Drawing.Point(101, 105);
-            this.labelAngle.Name = "labelAngle";
-            this.labelAngle.Size = new System.Drawing.Size(14, 13);
-            this.labelAngle.TabIndex = 13;
-            this.labelAngle.Text = "X";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(60, 105);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Angle:";
-            // 
-            // buttonStopGame
-            // 
-            this.buttonStopGame.BackColor = System.Drawing.Color.Firebrick;
-            this.buttonStopGame.Location = new System.Drawing.Point(85, 171);
-            this.buttonStopGame.Name = "buttonStopGame";
-            this.buttonStopGame.Size = new System.Drawing.Size(59, 24);
-            this.buttonStopGame.TabIndex = 11;
-            this.buttonStopGame.Text = "Stop";
-            this.buttonStopGame.UseVisualStyleBackColor = false;
-            this.buttonStopGame.Click += new System.EventHandler(this.buttonStopGame_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 147);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "GameSpeed:";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Increment = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Location = new System.Drawing.Point(96, 145);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(48, 20);
-            this.numericUpDown1.TabIndex = 9;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            // 
-            // labelSpeed
-            // 
-            this.labelSpeed.AutoSize = true;
-            this.labelSpeed.Location = new System.Drawing.Point(101, 82);
-            this.labelSpeed.Name = "labelSpeed";
-            this.labelSpeed.Size = new System.Drawing.Size(24, 13);
-            this.labelSpeed.TabIndex = 8;
-            this.labelSpeed.Text = "X,Y";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(56, 82);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Speed:";
-            // 
-            // labelPositionAbs
-            // 
-            this.labelPositionAbs.AutoSize = true;
-            this.labelPositionAbs.Location = new System.Drawing.Point(101, 58);
-            this.labelPositionAbs.Name = "labelPositionAbs";
-            this.labelPositionAbs.Size = new System.Drawing.Size(24, 13);
-            this.labelPositionAbs.TabIndex = 6;
-            this.labelPositionAbs.Text = "X,Y";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 58);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Absolute Position:";
-            // 
-            // labelSize
-            // 
-            this.labelSize.AutoSize = true;
-            this.labelSize.Location = new System.Drawing.Point(101, 125);
-            this.labelSize.Name = "labelSize";
-            this.labelSize.Size = new System.Drawing.Size(24, 13);
-            this.labelSize.TabIndex = 4;
-            this.labelSize.Text = "X,Y";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(67, 125);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Size:";
-            // 
-            // labelBullets
-            // 
-            this.labelBullets.AutoSize = true;
-            this.labelBullets.Location = new System.Drawing.Point(101, 16);
-            this.labelBullets.Name = "labelBullets";
-            this.labelBullets.Size = new System.Drawing.Size(14, 13);
-            this.labelBullets.TabIndex = 2;
-            this.labelBullets.Text = "X";
-            // 
             // labelScore
             // 
             this.labelScore.AutoSize = true;
-            this.labelScore.Location = new System.Drawing.Point(47, 5);
+            this.labelScore.Location = new System.Drawing.Point(52, 6);
             this.labelScore.Name = "labelScore";
             this.labelScore.Size = new System.Drawing.Size(13, 13);
             this.labelScore.TabIndex = 5;
@@ -404,7 +167,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 4);
+            this.label7.Location = new System.Drawing.Point(8, 6);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(38, 13);
             this.label7.TabIndex = 4;
@@ -417,6 +180,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.labelFuel);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.labelHP);
@@ -425,20 +189,19 @@
             this.panel1.Controls.Add(this.label19);
             this.panel1.Controls.Add(this.labelAmmo);
             this.panel1.Controls.Add(this.label50);
-            this.panel1.Controls.Add(this.checkBox1);
             this.panel1.Controls.Add(this.labelLevel);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.labelScore);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(600, 20);
+            this.panel1.Size = new System.Drawing.Size(600, 23);
             this.panel1.TabIndex = 4;
             // 
             // labelFuel
             // 
             this.labelFuel.AutoSize = true;
-            this.labelFuel.Location = new System.Drawing.Point(471, 5);
+            this.labelFuel.Location = new System.Drawing.Point(459, 6);
             this.labelFuel.Name = "labelFuel";
             this.labelFuel.Size = new System.Drawing.Size(31, 13);
             this.labelFuel.TabIndex = 16;
@@ -447,7 +210,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(435, 5);
+            this.label10.Location = new System.Drawing.Point(423, 6);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(30, 13);
             this.label10.TabIndex = 15;
@@ -456,7 +219,7 @@
             // labelHP
             // 
             this.labelHP.AutoSize = true;
-            this.labelHP.Location = new System.Drawing.Point(376, 5);
+            this.labelHP.Location = new System.Drawing.Point(376, 6);
             this.labelHP.Name = "labelHP";
             this.labelHP.Size = new System.Drawing.Size(25, 13);
             this.labelHP.TabIndex = 14;
@@ -465,7 +228,7 @@
             // label90
             // 
             this.label90.AutoSize = true;
-            this.label90.Location = new System.Drawing.Point(345, 5);
+            this.label90.Location = new System.Drawing.Point(345, 6);
             this.label90.Name = "label90";
             this.label90.Size = new System.Drawing.Size(25, 13);
             this.label90.TabIndex = 13;
@@ -474,7 +237,7 @@
             // labelUltimate
             // 
             this.labelUltimate.AutoSize = true;
-            this.labelUltimate.Location = new System.Drawing.Point(313, 5);
+            this.labelUltimate.Location = new System.Drawing.Point(313, 6);
             this.labelUltimate.Name = "labelUltimate";
             this.labelUltimate.Size = new System.Drawing.Size(13, 13);
             this.labelUltimate.TabIndex = 12;
@@ -483,7 +246,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(262, 4);
+            this.label19.Location = new System.Drawing.Point(262, 6);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(48, 13);
             this.label19.TabIndex = 11;
@@ -492,7 +255,7 @@
             // labelAmmo
             // 
             this.labelAmmo.AutoSize = true;
-            this.labelAmmo.Location = new System.Drawing.Point(220, 5);
+            this.labelAmmo.Location = new System.Drawing.Point(220, 6);
             this.labelAmmo.Name = "labelAmmo";
             this.labelAmmo.Size = new System.Drawing.Size(13, 13);
             this.labelAmmo.TabIndex = 10;
@@ -501,26 +264,16 @@
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(175, 5);
+            this.label50.Location = new System.Drawing.Point(175, 6);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(39, 13);
             this.label50.TabIndex = 9;
             this.label50.Text = "Ammo:";
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(576, 4);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 8;
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
             // labelLevel
             // 
             this.labelLevel.AutoSize = true;
-            this.labelLevel.Location = new System.Drawing.Point(130, 5);
+            this.labelLevel.Location = new System.Drawing.Point(130, 6);
             this.labelLevel.Name = "labelLevel";
             this.labelLevel.Size = new System.Drawing.Size(13, 13);
             this.labelLevel.TabIndex = 7;
@@ -529,7 +282,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(88, 5);
+            this.label8.Location = new System.Drawing.Point(88, 6);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(36, 13);
             this.label8.TabIndex = 6;
@@ -670,6 +423,27 @@
             this.canvasShip.Size = new System.Drawing.Size(600, 640);
             this.canvasShip.TabIndex = 5;
             this.canvasShip.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasShip_Paint);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(235, 311);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(33, 16);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "HP:";
+            // 
+            // barHP
+            // 
+            this.barHP.Location = new System.Drawing.Point(274, 311);
+            this.barHP.Maximum = 150;
+            this.barHP.Name = "barHP";
+            this.barHP.Size = new System.Drawing.Size(100, 16);
+            this.barHP.Step = 1;
+            this.barHP.TabIndex = 18;
+            this.barHP.Value = 70;
             // 
             // label14
             // 
@@ -982,8 +756,13 @@
             // 
             // tabGameWindow
             // 
-            this.tabGameWindow.Controls.Add(this.canvas);
+            this.tabGameWindow.Controls.Add(this.checkBox1);
+            this.tabGameWindow.Controls.Add(this.debugBox);
             this.tabGameWindow.Controls.Add(this.panel1);
+            this.tabGameWindow.Controls.Add(this.buttonFinish);
+            this.tabGameWindow.Controls.Add(this.labelPaused);
+            this.tabGameWindow.Controls.Add(this.labelPopUp);
+            this.tabGameWindow.Controls.Add(this.canvasBox);
             this.tabGameWindow.Location = new System.Drawing.Point(4, 22);
             this.tabGameWindow.Name = "tabGameWindow";
             this.tabGameWindow.Padding = new System.Windows.Forms.Padding(3);
@@ -1073,25 +852,39 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.panel3.Controls.Add(this.checkBox2);
+            this.panel3.Controls.Add(this.checkBoxDebuging);
+            this.panel3.Controls.Add(this.checkBoxSound);
             this.panel3.Controls.Add(this.button6);
             this.panel3.Location = new System.Drawing.Point(3, 2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(600, 640);
             this.panel3.TabIndex = 5;
             // 
-            // checkBox2
+            // checkBoxDebuging
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.ForeColor = System.Drawing.Color.White;
-            this.checkBox2.Location = new System.Drawing.Point(225, 63);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(93, 17);
-            this.checkBox2.TabIndex = 6;
-            this.checkBox2.Text = "Enable Sound";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBoxDebuging.AutoSize = true;
+            this.checkBoxDebuging.ForeColor = System.Drawing.Color.White;
+            this.checkBoxDebuging.Location = new System.Drawing.Point(225, 86);
+            this.checkBoxDebuging.Name = "checkBoxDebuging";
+            this.checkBoxDebuging.Size = new System.Drawing.Size(124, 17);
+            this.checkBoxDebuging.TabIndex = 7;
+            this.checkBoxDebuging.Text = "Enable Debug Mode";
+            this.checkBoxDebuging.UseVisualStyleBackColor = true;
+            this.checkBoxDebuging.CheckedChanged += new System.EventHandler(this.checkBoxDebuging_CheckedChanged);
+            // 
+            // checkBoxSound
+            // 
+            this.checkBoxSound.AutoSize = true;
+            this.checkBoxSound.Checked = true;
+            this.checkBoxSound.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSound.ForeColor = System.Drawing.Color.White;
+            this.checkBoxSound.Location = new System.Drawing.Point(225, 63);
+            this.checkBoxSound.Name = "checkBoxSound";
+            this.checkBoxSound.Size = new System.Drawing.Size(93, 17);
+            this.checkBoxSound.TabIndex = 6;
+            this.checkBoxSound.Text = "Enable Sound";
+            this.checkBoxSound.UseVisualStyleBackColor = true;
+            this.checkBoxSound.CheckedChanged += new System.EventHandler(this.checkBoxSound_CheckedChanged);
             // 
             // button6
             // 
@@ -1168,26 +961,279 @@
             this.timerPopUp.Interval = 1000;
             this.timerPopUp.Tick += new System.EventHandler(this.timerPopUp_Tick);
             // 
-            // barHP
+            // canvasBox
             // 
-            this.barHP.Location = new System.Drawing.Point(274, 311);
-            this.barHP.Maximum = 150;
-            this.barHP.Name = "barHP";
-            this.barHP.Size = new System.Drawing.Size(100, 16);
-            this.barHP.Step = 1;
-            this.barHP.TabIndex = 18;
-            this.barHP.Value = 70;
+            this.canvasBox.BackColor = System.Drawing.Color.SteelBlue;
+            this.canvasBox.Location = new System.Drawing.Point(3, 24);
+            this.canvasBox.Name = "canvasBox";
+            this.canvasBox.Size = new System.Drawing.Size(747, 630);
+            this.canvasBox.TabIndex = 10;
+            this.canvasBox.TabStop = false;
+            this.canvasBox.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasBox_Paint);
+            this.canvasBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvasBox_MouseMove);
+            this.canvasBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvasBox_MouseUp);
             // 
-            // label11
+            // buttonFinish
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(235, 311);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(33, 16);
-            this.label11.TabIndex = 19;
-            this.label11.Text = "HP:";
+            this.buttonFinish.BackColor = System.Drawing.Color.White;
+            this.buttonFinish.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonFinish.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFinish.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonFinish.Location = new System.Drawing.Point(220, 352);
+            this.buttonFinish.Name = "buttonFinish";
+            this.buttonFinish.Size = new System.Drawing.Size(150, 35);
+            this.buttonFinish.TabIndex = 9;
+            this.buttonFinish.Text = "Finish Game";
+            this.buttonFinish.UseVisualStyleBackColor = false;
+            this.buttonFinish.Visible = false;
+            // 
+            // labelPaused
+            // 
+            this.labelPaused.BackColor = System.Drawing.Color.Silver;
+            this.labelPaused.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPaused.ForeColor = System.Drawing.Color.Black;
+            this.labelPaused.Location = new System.Drawing.Point(8, 298);
+            this.labelPaused.Name = "labelPaused";
+            this.labelPaused.Size = new System.Drawing.Size(582, 39);
+            this.labelPaused.TabIndex = 5;
+            this.labelPaused.Text = "Game Paused";
+            this.labelPaused.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelPaused.Visible = false;
+            // 
+            // labelPopUp
+            // 
+            this.labelPopUp.BackColor = System.Drawing.Color.SteelBlue;
+            this.labelPopUp.Font = new System.Drawing.Font("Monospac821 BT", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPopUp.ForeColor = System.Drawing.Color.White;
+            this.labelPopUp.Location = new System.Drawing.Point(172, 36);
+            this.labelPopUp.Name = "labelPopUp";
+            this.labelPopUp.Size = new System.Drawing.Size(244, 32);
+            this.labelPopUp.TabIndex = 4;
+            this.labelPopUp.Text = "Level 1";
+            this.labelPopUp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelPopUp.Visible = false;
+            // 
+            // debugBox
+            // 
+            this.debugBox.BackColor = System.Drawing.Color.Transparent;
+            this.debugBox.Controls.Add(this.button1);
+            this.debugBox.Controls.Add(this.label6);
+            this.debugBox.Controls.Add(this.labelAsteroids);
+            this.debugBox.Controls.Add(this.labelAngle);
+            this.debugBox.Controls.Add(this.label5);
+            this.debugBox.Controls.Add(this.buttonStopGame);
+            this.debugBox.Controls.Add(this.label3);
+            this.debugBox.Controls.Add(this.numericUpDown1);
+            this.debugBox.Controls.Add(this.labelSpeed);
+            this.debugBox.Controls.Add(this.label4);
+            this.debugBox.Controls.Add(this.labelPositionAbs);
+            this.debugBox.Controls.Add(this.label2);
+            this.debugBox.Controls.Add(this.labelSize);
+            this.debugBox.Controls.Add(this.label1);
+            this.debugBox.Controls.Add(this.labelpos);
+            this.debugBox.Controls.Add(this.labelBullets);
+            this.debugBox.Location = new System.Drawing.Point(440, 26);
+            this.debugBox.Name = "debugBox";
+            this.debugBox.Size = new System.Drawing.Size(150, 200);
+            this.debugBox.TabIndex = 3;
+            this.debugBox.TabStop = false;
+            this.debugBox.Visible = false;
+            this.debugBox.Enter += new System.EventHandler(this.debugBox_Enter);
+            // 
+            // labelBullets
+            // 
+            this.labelBullets.AutoSize = true;
+            this.labelBullets.Location = new System.Drawing.Point(101, 16);
+            this.labelBullets.Name = "labelBullets";
+            this.labelBullets.Size = new System.Drawing.Size(14, 13);
+            this.labelBullets.TabIndex = 2;
+            this.labelBullets.Text = "X";
+            // 
+            // labelpos
+            // 
+            this.labelpos.AutoSize = true;
+            this.labelpos.Location = new System.Drawing.Point(49, 16);
+            this.labelpos.Name = "labelpos";
+            this.labelpos.Size = new System.Drawing.Size(41, 13);
+            this.labelpos.TabIndex = 1;
+            this.labelpos.Text = "Bullets:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(67, 125);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Size:";
+            // 
+            // labelSize
+            // 
+            this.labelSize.AutoSize = true;
+            this.labelSize.Location = new System.Drawing.Point(101, 125);
+            this.labelSize.Name = "labelSize";
+            this.labelSize.Size = new System.Drawing.Size(24, 13);
+            this.labelSize.TabIndex = 4;
+            this.labelSize.Text = "X,Y";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 58);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(91, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Absolute Position:";
+            // 
+            // labelPositionAbs
+            // 
+            this.labelPositionAbs.AutoSize = true;
+            this.labelPositionAbs.Location = new System.Drawing.Point(101, 58);
+            this.labelPositionAbs.Name = "labelPositionAbs";
+            this.labelPositionAbs.Size = new System.Drawing.Size(24, 13);
+            this.labelPositionAbs.TabIndex = 6;
+            this.labelPositionAbs.Text = "X,Y";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(56, 82);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Speed:";
+            // 
+            // labelSpeed
+            // 
+            this.labelSpeed.AutoSize = true;
+            this.labelSpeed.Location = new System.Drawing.Point(101, 82);
+            this.labelSpeed.Name = "labelSpeed";
+            this.labelSpeed.Size = new System.Drawing.Size(24, 13);
+            this.labelSpeed.TabIndex = 8;
+            this.labelSpeed.Text = "X,Y";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Location = new System.Drawing.Point(96, 145);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(48, 20);
+            this.numericUpDown1.TabIndex = 9;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(21, 147);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(69, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "GameSpeed:";
+            // 
+            // buttonStopGame
+            // 
+            this.buttonStopGame.BackColor = System.Drawing.Color.Firebrick;
+            this.buttonStopGame.Location = new System.Drawing.Point(85, 171);
+            this.buttonStopGame.Name = "buttonStopGame";
+            this.buttonStopGame.Size = new System.Drawing.Size(59, 24);
+            this.buttonStopGame.TabIndex = 11;
+            this.buttonStopGame.Text = "Stop";
+            this.buttonStopGame.UseVisualStyleBackColor = false;
+            this.buttonStopGame.Click += new System.EventHandler(this.buttonStopGame_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(60, 105);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(37, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Angle:";
+            // 
+            // labelAngle
+            // 
+            this.labelAngle.AutoSize = true;
+            this.labelAngle.Location = new System.Drawing.Point(101, 105);
+            this.labelAngle.Name = "labelAngle";
+            this.labelAngle.Size = new System.Drawing.Size(14, 13);
+            this.labelAngle.TabIndex = 13;
+            this.labelAngle.Text = "X";
+            // 
+            // labelAsteroids
+            // 
+            this.labelAsteroids.AutoSize = true;
+            this.labelAsteroids.Location = new System.Drawing.Point(101, 29);
+            this.labelAsteroids.Name = "labelAsteroids";
+            this.labelAsteroids.Size = new System.Drawing.Size(14, 13);
+            this.labelAsteroids.TabIndex = 15;
+            this.labelAsteroids.Text = "X";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(37, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Asteroids:";
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(6, 171);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 24);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "StartNew";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(569, 573);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.TabIndex = 8;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // button7
+            // 
+            this.button7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button7.BackColor = System.Drawing.Color.White;
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button7.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.button7.Location = new System.Drawing.Point(525, 1);
+            this.button7.Margin = new System.Windows.Forms.Padding(0);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(64, 22);
+            this.button7.TabIndex = 11;
+            this.button7.Text = "Stop";
+            this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.button7.UseVisualStyleBackColor = false;
             // 
             // SimpleGame
             // 
@@ -1195,15 +1241,12 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(600, 621);
             this.Controls.Add(this.tabControl);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "SimpleGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SimpleGame";
-            this.canvas.ResumeLayout(false);
-            this.debugBox.ResumeLayout(false);
-            this.debugBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelMenu.ResumeLayout(false);
@@ -1229,37 +1272,22 @@
             this.panel3.PerformLayout();
             this.tabInfo.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.canvasBox)).EndInit();
+            this.debugBox.ResumeLayout(false);
+            this.debugBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Label labelpos;
         private System.Windows.Forms.Timer timerRefresh;
-        private System.Windows.Forms.Panel canvas;
-        private System.Windows.Forms.GroupBox debugBox;
-        private System.Windows.Forms.Label labelSize;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelPositionAbs;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label labelBullets;
-        private System.Windows.Forms.Label labelSpeed;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Timer timerGameTick;
-        private System.Windows.Forms.Button buttonStopGame;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label labelAngle;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label labelAsteroids;
         private System.Windows.Forms.Label labelScore;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelLevel;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonInfo;
@@ -1317,15 +1345,37 @@
         private System.Windows.Forms.Label labelScoreFinall;
         private System.Windows.Forms.Label labelHP;
         private System.Windows.Forms.Label label90;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBoxSound;
         private System.Windows.Forms.Label labelLevelFinall;
         private System.Windows.Forms.Label labelFuel;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label labelPopUp;
         private System.Windows.Forms.Timer timerPopUp;
-        private System.Windows.Forms.Label labelPaused;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ProgressBar barHP;
+        private System.Windows.Forms.CheckBox checkBoxDebuging;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.GroupBox debugBox;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelAsteroids;
+        private System.Windows.Forms.Label labelAngle;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button buttonStopGame;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label labelSpeed;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelPositionAbs;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelSize;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelpos;
+        private System.Windows.Forms.Label labelBullets;
+        private System.Windows.Forms.Button buttonFinish;
+        private System.Windows.Forms.Label labelPaused;
+        private System.Windows.Forms.Label labelPopUp;
+        private System.Windows.Forms.PictureBox canvasBox;
+        private System.Windows.Forms.Button button7;
     }
 }
 
