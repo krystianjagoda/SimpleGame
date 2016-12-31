@@ -27,6 +27,7 @@ namespace SimpleGame
         SoundPlayer soundEmpty = new SoundPlayer(Properties.Resources.empty);
         SoundPlayer soundHit = new SoundPlayer(Properties.Resources.hit);
         SoundPlayer soundHit2 = new SoundPlayer(Properties.Resources.hit2);
+        SoundPlayer pick = new SoundPlayer(Properties.Resources.pick);
 
 
         Brush myBrush = new SolidBrush(Color.Firebrick);
@@ -51,9 +52,7 @@ namespace SimpleGame
         };
 
         List<Asteroid> bonuses = new List<Asteroid> {
-                   new BonusAmmo(){Name = "AmmoA", X = 200, Y = 200},
-                   new BonusHP(){Name = "HPA", X = 250, Y = 200},
-                   new BonusFuel(){Name = "HPA", X = 300, Y = 200},
+         //          new Bonus(){Name = "AmmoA", X = 200, Y = 200, BonusType = 'A'},
         };
 
 
@@ -126,6 +125,11 @@ namespace SimpleGame
 
         public void StartNewLevel(int level)
         {
+
+            gameWindow.GamePaused = false;
+            gameWindow.GameStop = false;
+
+            bullets.Clear();
             gameWindow.GameStop = true;
             labelPopUp.Text = "Level " + gameWindow.GameLevel;
             labelPopUp.Visible = true;
@@ -157,9 +161,9 @@ namespace SimpleGame
         {
             int Xrand = random1.Next(0, 600);
             int Yrand = random1.Next(0, 600);
-            int VXrand = random1.Next(-10 -gameWindow.GameLevel, 10 + gameWindow.GameLevel);
-            int VYrand = random1.Next(-10 - -gameWindow.GameLevel, 10 + gameWindow.GameLevel);
-            int Srand = random1.Next(20 + gameWindow.GameLevel * 5, 100+ gameWindow.GameLevel*5);
+            int VXrand = random1.Next(-12 -gameWindow.GameLevel, 12 + gameWindow.GameLevel);
+            int VYrand = random1.Next(-12 - -gameWindow.GameLevel, 12 + gameWindow.GameLevel);
+            int Srand = random1.Next(40 + gameWindow.GameLevel * 7, 150+ gameWindow.GameLevel*7);
             int Crand = random1.Next(0, 10);
 
             if(Xrand > 250 && Xrand < 350)
@@ -182,55 +186,106 @@ namespace SimpleGame
 
         }
 
+        public void Respawn_Bonus(float _X, float _Y, float vX, float vY)
+        {
+            int ChanceRand = random1.Next(0, 1000);
+            int TypeRand = random1.Next(0,3);
+
+            char tempType = 'H';
+
+            if (TypeRand == 0) tempType = 'A';
+            else if (TypeRand == 1) tempType = 'H';
+            else if (TypeRand == 2) tempType = 'F';
+
+            if (ChanceRand < gameWindow.BonusChance)
+            {
+                bonuses.Add(new Bonus()
+                {
+                    Visible = true,
+                    X = _X,
+                    Y = _Y,
+                    velocityX = vX,
+                    velocityY = vY,
+                    size = 20,
+                    BonusType = tempType,
+                });
+            }
+        }
+
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            //capture left arrow key
-            if (keyData == Keys.Left)
-            {
-                //    ship.positionX = ship.positionX - gameWindow.UnitLength;
-                ship.velocityX = ship.velocityX - 3;
-                return true;
-            }
-            //capture right arrow key
-            if (keyData == Keys.Right)
-            {
-                //    ship.positionX = ship.positionX + gameWindow.UnitLength;
-                ship.velocityX = ship.velocityX + 3;
-                return true;
-            }
+            ////capture left arrow key
+            //if (keyData == Keys.Left)
+            //{
+            //    //    ship.positionX = ship.positionX - gameWindow.UnitLength;
+            //    ship.velocityX = ship.velocityX - 3;
+            //    return true;
+            //}
+            ////capture right arrow key
+            //if (keyData == Keys.Right)
+            //{
+            //    //    ship.positionX = ship.positionX + gameWindow.UnitLength;
+            //    ship.velocityX = ship.velocityX + 3;
+            //    return true;
+            //}
 
-            //capture up arrow key
-            if (keyData == Keys.Up)
-            {
-                //   ship.positionY = ship.positionY - gameWindow.UnitHeight;
-                ship.velocityY = ship.velocityY - 3;
-                return true;
-            }
-            //capture down arrow key
-            if (keyData == Keys.Down)
-            {
-                ship.velocityY = ship.velocityY + 3;
-                //     ship.positionY = ship.positionY + gameWindow.UnitHeight;
-                return true;
-            }
+            ////capture up arrow key
+            //if (keyData == Keys.Up)
+            //{
+            //    //   ship.positionY = ship.positionY - gameWindow.UnitHeight;
+            //    ship.velocityY = ship.velocityY - 3;
+            //    return true;
+            //}
+            ////capture down arrow key
+            //if (keyData == Keys.Down)
+            //{
+            //    ship.velocityY = ship.velocityY + 3;
+            //    //     ship.positionY = ship.positionY + gameWindow.UnitHeight;
+            //    return true;
+            //}
             //capture down ctrl key
             if (keyData == Keys.X)
             {
-                Ultimate();
+                if (gameWindow.GameStop == false)
+                {
+                    Ultimate();
+                }
                 return true;
             }
             // Space Pressed = Game Stop
             if (keyData == Keys.P)
             {
-                gameWindow.GameStop = !gameWindow.GameStop;
                 if (gameWindow.GameStop == true)
                 {
+                    gameWindow.GamePaused = false;
+                    gameWindow.GameStop = false;
                     buttonStopGame.Text = "Start";
                     buttonStopGame.BackColor = System.Drawing.Color.LimeGreen;
                 }
                 else if (gameWindow.GameStop == false)
                 {
+                    gameWindow.GamePaused = true;
+                    gameWindow.GameStop = true;
+                    buttonStopGame.Text = "Stop";
+                    buttonStopGame.BackColor = System.Drawing.Color.Firebrick;
+                }
+                return true;
+            }
+
+            if (keyData == Keys.Escape)
+            {
+                if (gameWindow.GameStop == true)
+                {
+                    gameWindow.GamePaused = false;
+                    gameWindow.GameStop = false;
+                    buttonStopGame.Text = "Start";
+                    buttonStopGame.BackColor = System.Drawing.Color.LimeGreen;
+                }
+                else if (gameWindow.GameStop == false)
+                {
+                    gameWindow.GamePaused = true;
+                    gameWindow.GameStop = true;
                     buttonStopGame.Text = "Stop";
                     buttonStopGame.BackColor = System.Drawing.Color.Firebrick;
                 }
@@ -261,30 +316,11 @@ namespace SimpleGame
 
         private void canvasBox_Paint(object sender, PaintEventArgs e)
         {
-            foreach (Asteroid a in asteroids)
-            {
-                a.draw(e.Graphics);
-            }
-
-            foreach (Bullet b in bullets)
-            {
-                b.drawBullet(e.Graphics);
-            }
-
-
-            bonuses[0].draw(e.Graphics);
-            bonuses[1].draw(e.Graphics);
-            bonuses[2].draw(e.Graphics);
-
+            foreach (Asteroid a in asteroids){  a.draw(e.Graphics);          }
+            foreach (Bullet b in bullets){      b.draw(e.Graphics);    }
+            foreach(Bonus b in bonuses){        b.draw(e.Graphics);          }
             ship.drawShip(e.Graphics);
         }
-
-
-                                                                                            private void canvas_Paint(object sender, PaintEventArgs e)
-                                                                                            {
-
-                                                                                            }
-
 
         public partial class BufferPanel : Panel
         {
@@ -324,28 +360,34 @@ namespace SimpleGame
             labelFuel.Text = ship.Fuel.ToString();
 
             canvasBox.Invalidate();
+
+            if(gameWindow.GamePaused == true)
+            {
+                buttonFinish.Visible = true;
+                buttonResume.Visible = true;
+                labelPaused.Visible = true;
+            }
+            else
+            {
+                buttonFinish.Visible = false;
+                buttonResume.Visible = false;
+                labelPaused.Visible = false;
+            }
+
         }
 
-                                                                                                private void canvas_MouseClick(object sender, MouseEventArgs e)
-                                                                                                {
-                                                                                                }
 
         private void canvasBox_MouseMove(object sender, MouseEventArgs e)
         {
-            MouseX = e.Location.X;
-            MouseY = e.Location.Y;
+            if (gameWindow.GameStop == false)
+            {
+                MouseX = e.Location.X;
+                MouseY = e.Location.Y;
 
-            ship.calcAngle(MouseX, MouseY);
+                ship.calcAngle(MouseX, MouseY);
+            }
         }
 
-
-                                                                                                private void canvas_MouseMove(object sender, MouseEventArgs e)
-                                                                                                {
-                                                                                                }
-
-                                                                                                private void canvas_Click(object sender, EventArgs e)
-                                                                                                {
-                                                                                                }
 
         private void timerGameTick_Tick(object sender, EventArgs e)
         {
@@ -353,7 +395,7 @@ namespace SimpleGame
             if (gameWindow.NumberOfAsteroids == 0)
             {
                 gameWindow.GameLevel++;
-                ship.Reset();
+                ship.Resupply();
                 StartNewLevel(gameWindow.GameLevel);
 
             }
@@ -381,17 +423,45 @@ namespace SimpleGame
                 foreach (Bullet b in bullets)
                 {
                     b.refresh();
-                }
 
-                foreach (Bullet b in bullets)
-                {
-                    
                     if (b.isInRange(0, 0, gameWindow.XSize, gameWindow.YSize) == false)
                     {
                         bullets.Remove(b);
                         break;
                     }
                 }
+
+
+                foreach (Bonus b in bonuses)
+                {
+                    b.refresh();
+
+                    if (b.X > gameWindow.XSize) b.X = 0;
+                    if (b.X < 0) b.X = gameWindow.XSize;
+                    if (b.Y > gameWindow.YSize) b.Y = 0;
+                    if (b.Y < 0) b.Y = gameWindow.YSize;
+
+                    if (((b.X - ship.Xabs) * (b.X - ship.Xabs) + (b.Y - ship.Yabs) * (b.Y - ship.Yabs)) - ((b.size / 2) * (b.size / 2)) < 10)
+                    {
+                        if(b.BonusType == 'A')
+                        {
+                            ship.Ammo = ship.Ammo + 20;
+                        }
+                        else if (b.BonusType == 'H')
+                        {
+                            ship.HP = ship.HP + 50;
+                        }
+                        else if (b.BonusType == 'F')
+                        {
+                            ship.Fuel = ship.Fuel + 200;
+                        }
+                        if (gameWindow.SoundEnabled) pick.Play();
+                        bonuses.Remove(b);
+                        break;
+                    }
+
+                }
+
 
                 foreach (Asteroid a in asteroids)
                 {
@@ -409,15 +479,17 @@ namespace SimpleGame
 
                     if (((a.X - ship.Xabs) * (a.X - ship.Xabs) + (a.Y - ship.Yabs) * (a.Y - ship.Yabs)) - ((a.size / 2) * (a.size / 2)) < 10)
                     {
-                        ship.HP = ship.HP - 3;                        
+                        ship.HP = ship.HP - 3;
+                        a.HP = a.HP - 3;                                                
                         if(ship.HP < 0)
                         {
-                            ship.HP = 0;
-                            labelScoreFinall.Text = "Score: " + gameWindow.Score.ToString();
-                            labelLevelFinall.Text = "Level: " + gameWindow.GameLevel.ToString();
-                            tabControl.SelectedIndex = 4;   // Go to Score;
-                            if (gameWindow.SoundEnabled) soundHit.Play();
+                            EndGame();
                             break;
+                        }
+                        if (a.HP <= 20)
+                        {
+                            tempA = a;
+                            AsteroidtoRemove = true;
                         }
 
                     }
@@ -429,7 +501,7 @@ namespace SimpleGame
                             a.HP = a.HP - ship.Damage;
                             tempB = b;
                             BullettoRemove = true;
-                            if (a.HP <= 15)
+                            if (a.HP <= 20)
                             {
                                 tempA = a;
                                 AsteroidtoRemove = true;
@@ -438,9 +510,14 @@ namespace SimpleGame
                     }
                     if (AsteroidtoRemove)
                     {
-                        asteroids.Remove(tempA);
-                        gameWindow.Score++;
-                        break;
+                        if (bonuses.Count < 8)
+                        {
+                            Respawn_Bonus(tempA.X, tempA.Y, tempA.velocityX / 2, tempA.velocityY / 2);
+
+                            asteroids.Remove(tempA);
+                            gameWindow.Score++;
+                            break;
+                        }
                     }
                     if (BullettoRemove)
                     {
@@ -453,17 +530,15 @@ namespace SimpleGame
             }
         }
 
-                                                                                                            private void canvas_MouseDown(object sender, MouseEventArgs e)
-                                                                                                            {
 
-                                                                                                            }
+        public void EndGame()
+        {
+            labelScoreFinall.Text = "Score: " + gameWindow.Score.ToString();
+            labelLevelFinall.Text = "Level: " + gameWindow.GameLevel.ToString();
+            tabControl.SelectedIndex = 4;   // Go to Score;
+            if (gameWindow.SoundEnabled) soundHit.Play();
+        }
 
-
-
-
-                                                                                                            private void canvas_MouseUp(object sender, MouseEventArgs e)
-                                                                                                            {
-                                                                                                            }
 
 
         private void canvasBox_MouseUp(object sender, MouseEventArgs e)
@@ -690,6 +765,40 @@ namespace SimpleGame
             else if (checkBoxDebuging.Checked == false) gameWindow.DebugModeEnabled = false;
         }
 
+        private void timerRandomBonus_Tick(object sender, EventArgs e)
+        {
+            if(bonuses.Count < 2)
+            {
+                int Xrand = random1.Next(0, 600);
+                int Yrand = random1.Next(0, 600);
+                int VXrand = random1.Next(-10, 10);
+                int VYrand = random1.Next(-10, 10);
 
+                Respawn_Bonus(Xrand, Yrand, VXrand, VYrand);
+            }
+        }
+
+        private void buttonResume_Click(object sender, EventArgs e)
+        {
+            if (gameWindow.GameStop == true)
+            {
+                gameWindow.GamePaused = false;
+                gameWindow.GameStop = false;
+                buttonStopGame.Text = "Start";
+                buttonStopGame.BackColor = System.Drawing.Color.LimeGreen;
+            }
+            else if (gameWindow.GameStop == false)
+            {
+                gameWindow.GamePaused = true;
+                gameWindow.GameStop = true;
+                buttonStopGame.Text = "Stop";
+                buttonStopGame.BackColor = System.Drawing.Color.Firebrick;
+            }
+        }
+
+        private void buttonFinish_Click(object sender, EventArgs e)
+        {
+            EndGame();
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace SimpleGame
 
         public bool SoundEnabled = true;
         public bool DebugModeEnabled = false;
+        public bool GamePaused = false;
 
         public int Score = 0;
         public int GameLevel = 1;
@@ -32,6 +33,8 @@ namespace SimpleGame
 
         public int centerX = 0;
         public int centerY = 0;
+
+        public int BonusChance = 350; //  35.0%
 
 
         public void SetSize(int X, int Y)

@@ -43,34 +43,50 @@ namespace SimpleGame
         public double slowdown = 0.98;
 
 
+        public void Resupply()
+        {
+            int tempAmmo = this.Ammo;
+            int tempUlti = this.Ultimate;
+            int tempHP = this.HP;
+            int tempFuel = this.Fuel;
+
+            this.Reset();
+
+            this.Ammo = this.Ammo + tempAmmo;
+            this.Ultimate = this.Ultimate + tempUlti;
+            this.HP = this.HP + tempHP;
+            this.Fuel = this.Fuel + tempFuel;
+        }
+
+
         public void Reset()
         {
             if(this.Type == 'A')    // Ship A Settings
             {
                 this.Ammo = 30;
-                this.Ultimate = 10;
+                this.Ultimate = 6;
                 this.HP = 100;
                 this.Fuel = 220;
                 this.speed = 2;
-                this.Damage = 15;
+                this.Damage = 22;
             }
             else if(this.Type == 'B')   // Ship B Settings
             {
                 this.Ammo = 60;
-                this.Ultimate = 10;
+                this.Ultimate = 6;
                 this.HP = 120;
                 this.Fuel = 300;
                 this.speed = 1;
-                this.Damage = 20;
+                this.Damage = 30;
             }
             else if (this.Type == 'C')  // Ship C Settings
             {
                 this.Ammo = 40;
-                this.Ultimate = 10;
+                this.Ultimate = 6;
                 this.HP = 60;
                 this.Fuel = 180;
                 this.speed = 3;
-                this.Damage = 17;
+                this.Damage = 26;
             }
 
         }
@@ -239,7 +255,7 @@ namespace SimpleGame
         }
 
 
-        public void Spawn(float X, float Y, float Xspeed, float Yspeed, float Size, int Colo)
+        public virtual void Spawn(float X, float Y, float Xspeed, float Yspeed, float Size, int Colo)
         {
             this.size = Size;
             this.Colore = Colo;
@@ -289,59 +305,33 @@ namespace SimpleGame
     }
 
 
-    public class BonusAmmo : Asteroid
+    public class Bonus : Asteroid
     {
+        public char BonusType = 'H';
         
-        Brush myGreenBrush = new SolidBrush(Color.Green);
-        Brush myYellowBrush = new SolidBrush(Color.Yellow);
-        Pen myYellowPen = new Pen(Color.Yellow);
-
         public override void draw(Graphics g)
         {
-            g.FillRectangle(myGreenBrush, X - 10, Y - 10, 20, 20);
-            g.FillEllipse(myYellowBrush, X - 4, Y - 4, 8, 8);
-            g.DrawRectangle(myYellowPen, X - 10, Y - 10, 20, 20);
+            if(this.BonusType == 'A')
+            {
+                g.FillRectangle(Brushes.Green, X - 10, Y - 10, 20, 20);
+                g.FillEllipse(Brushes.Yellow, X - 4, Y - 4, 8, 8);
+                g.DrawRectangle(Pens.White, X - 10, Y - 10, 20, 20);
+            }
+            else if (this.BonusType == 'H')
+            {
+                g.FillRectangle(Brushes.Red, X - 10, Y - 10, 20, 20);
+                g.FillRectangle(Brushes.White, X - 2, Y - 10, 5, 20);
+                g.FillRectangle(Brushes.White, X - 10, Y - 2, 20, 5);
+                g.DrawRectangle(Pens.White, X - 10, Y - 10, 20, 20);
+            }
+            else if (this.BonusType == 'F')
+            {
+                g.FillRectangle(Brushes.White, X - 10, Y - 10, 20, 20);
+                g.FillEllipse(Brushes.Green, X - 8, Y - 8, 16, 16);
+                g.DrawRectangle(Pens.White, X - 10, Y - 10, 20, 20);
+            }
         }
-
     }
-
-
-    public class BonusHP : Asteroid
-    {
-
-        Brush myRedBrush = new SolidBrush(Color.Red);
-        Brush myWhiteBrush = new SolidBrush(Color.White);
-        Pen myWhitePen = new Pen(Color.White);
-
-        public override void draw(Graphics g)
-        {
-            g.FillRectangle(myRedBrush, X - 10, Y - 10, 20, 20);
-
-            g.FillRectangle(myWhiteBrush, X - 2,  Y-10,  5, 20);
-            g.FillRectangle(myWhiteBrush, X - 10, Y-2 , 20, 5);
-
-            g.DrawRectangle(myWhitePen, X - 10, Y - 10, 20, 20);
-        }
-
-    }
-
-
-    public class BonusFuel : Asteroid
-    {
-
-        Brush myGreenBrush = new SolidBrush(Color.Green);
-        Brush myWhiteBrush = new SolidBrush(Color.White);
-        Pen myGreenPen = new Pen(Color.Green);
-
-        public override void draw(Graphics g)
-        {
-            g.FillRectangle(myWhiteBrush, X - 10, Y - 10, 20, 20);
-            g.FillEllipse(myGreenBrush, X - 8, Y - 8, 16, 16);
-            g.DrawRectangle(myGreenPen, X - 10, Y - 10, 20, 20);
-        }
-
-    }
-
 
     class Bullet
     {
@@ -403,7 +393,7 @@ namespace SimpleGame
             else return true;
         }
 
-        public void drawBullet(Graphics g)
+        public void draw(Graphics g)
         {
             if (Visible)
             {
